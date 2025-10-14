@@ -1,0 +1,6 @@
+# backend
+node_modules/
+build/
+tmp/
+temp/
+database.sqlite
