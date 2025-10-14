@@ -1,4 +1,4 @@
-# Market Place APP 📱
+# Market Place Docs
 
 [Backend documentation](https://github.com/GiovannyFialho/market-place-app/blob/main/backend/README.md)
 
