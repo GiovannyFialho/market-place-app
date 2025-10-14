@@ -1,54 +1,56 @@
-# Dtmoney - Backend - RocketSeat
+# Backend
 
-Este é o backend do projeto **dtmoney**.
+This is the backend of the **marketplace** project.
 
-## 🚀 Tecnologias
+## 🚀 Technologies
 
 - **Node.js**
 - **TypeScript**
 - **TypeORM**
 - **SQLite**
 
-## 📦 Instalação e Execução
+## 📦 Installation and Execution
 
-Siga os passos abaixo para configurar e rodar o projeto em seu ambiente local.
+Follow the steps below to set up and run the project in your local
+environment.
 
-### 1️⃣ Clonar o repositório
+### 1️⃣ Clone the repository
 
 ```sh
 git clone https://github.com/brenooliveiranascimento/DT-money-backend.git
 cd dtmoney-backend
 ```
 
-### 2️⃣ Instalar as dependências
+### 2️⃣ Install dependencies
 
-Utilize o gerenciador de pacotes **yarn** ou **npm** para instalar todas as dependências do projeto:
+Use the package manager **yarn** or **npm** to install all project
+dependencies:
 
 ```sh
 yarn
-ou
+or
 npm i
 ```
 
-### 3️⃣ Rodar as migrations
+### 3️⃣ Run the migrations
 
-Execute o comando abaixo para criar as tabelas no banco de dados:
+Run the command below to create the tables in the database:
 
 ```sh
 yarn migration:run
-ou
+or
 npm run migration:run
 ```
 
-### 4️⃣ Iniciar o servidor
+### 4️⃣ Start the server
 
-Agora, basta rodar o servidor com:
+Now, just start the server with:
 
 ```sh
 yarn dev
-ou
+or
 npm run dev
 ```
 
-O backend estará rodando em `http://localhost:3001`.
-Para acessar a documentação `http://localhost:3001/docs`
+The backend will be running at `http://localhost:3001`.\
+To access the documentation: `http://localhost:3001/docs`
