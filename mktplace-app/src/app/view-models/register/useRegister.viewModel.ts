@@ -2,6 +2,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 
 import { useRegisterMutation } from "../../../shared/queries/auth/use-register.mutation";
+import { useUserStore } from "../../../shared/store/user-store";
 
 import {
   registerSchema,
@@ -10,6 +11,7 @@ import {
 
 export function useRegisterViewModel() {
   const userRegisterMutation = useRegisterMutation();
+  const { setSession } = useUserStore();
 
   const {
     control,
@@ -18,8 +20,8 @@ export function useRegisterViewModel() {
   } = useForm<RegisterSchema>({
     resolver: zodResolver(registerSchema),
     defaultValues: {
-      name: "Teste",
-      email: "teste@teste.com",
+      name: "Teste 2",
+      email: "teste2@teste.com",
       phone: "11111111111",
       password: "123456",
       confirmPassword: "123456",
@@ -29,7 +31,15 @@ export function useRegisterViewModel() {
   const onSubmit = handleSubmit(async (userData) => {
     const { confirmPassword, ...registerData } = userData;
 
-    await userRegisterMutation.mutateAsync(registerData);
+    const mutationResponse = await userRegisterMutation.mutateAsync(
+      registerData
+    );
+
+    setSession({
+      user: mutationResponse.user,
+      token: mutationResponse.token,
+      refreshToken: mutationResponse.refreshToken,
+    });
   });
 
   return { control, errors, onSubmit };
