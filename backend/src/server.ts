@@ -1,14 +1,14 @@
-import fastify from "fastify";
-import * as Routes from "./infra/web/routes";
+import fastifyMultipart from "@fastify/multipart";
+import fastifyStatic from "@fastify/static";
 import "dotenv/config";
-import * as Swagger from "./infra/web/config/swagger";
+import fastify from "fastify";
 import * as Database from "./infra/database/";
 import * as Cors from "./infra/web/config/cors";
-import * as Schema from "./infra/web/config/schema";
 import * as ErrorHandler from "./infra/web/config/error-handler";
-import fastifyStatic from "@fastify/static";
+import * as Schema from "./infra/web/config/schema";
+import * as Swagger from "./infra/web/config/swagger";
+import * as Routes from "./infra/web/routes";
 import path = require("path");
-import fastifyMultipart from "@fastify/multipart";
 
 (async () => {
   const app = fastify();
@@ -39,6 +39,7 @@ import fastifyMultipart from "@fastify/multipart";
   app.listen(
     {
       port: 3001,
+      host: "0.0.0.0", // 🔑 permite conexões externas (mesma rede)
     },
     () => {
       console.log("Api rodando na porta 3001");
