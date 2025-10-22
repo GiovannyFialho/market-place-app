@@ -1,7 +1,10 @@
 import { Text, TouchableOpacity, View } from "react-native";
 
 import { useUserStore } from "../../../shared/store/user-store";
+
 import { useRegisterViewModel } from "./useRegister.viewModel";
+
+import { AppInput } from "../../../shared/components/app-input";
 
 type RegisterViewProps = ReturnType<typeof useRegisterViewModel>;
 
@@ -15,6 +18,8 @@ export default function RegisterView({ onSubmit }: RegisterViewProps) {
       </Text>
 
       {user?.name && <Text className="text-base font-medium">{user.name}</Text>}
+
+      <AppInput />
 
       <TouchableOpacity
         className="mt-5 bg-slate-900 w-max py-2 px-3 rounded-lg"
