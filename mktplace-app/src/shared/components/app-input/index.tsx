@@ -3,7 +3,7 @@ import { Pressable, TextInput, TouchableOpacity, View } from "react-native";
 
 import { appInputVariants } from "./input.variants";
 
-export const AppInput = () => {
+export function AppInput() {
   const styles = appInputVariants();
 
   return (
@@ -19,4 +19,4 @@ export const AppInput = () => {
       </Pressable>
     </View>
   );
-};
+}
