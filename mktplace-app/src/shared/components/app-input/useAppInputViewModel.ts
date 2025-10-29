@@ -57,6 +57,14 @@ export function useAppInputViewModel({
     return colors.grays[200];
   }
 
+  function handleTextChange(text: string) {
+    if (mask) {
+      onChangeText?.(mask(text) || "");
+    } else {
+      onChangeText?.(text);
+    }
+  }
+
   return {
     getIconColor,
     handleBlur,
@@ -64,5 +72,7 @@ export function useAppInputViewModel({
     handleWrapperPress,
     handlePasswordToggle,
     showPassword,
+    handleTextChange,
+    isFocused,
   };
 }

@@ -19,7 +19,9 @@ export default function RegisterView({ onSubmit }: RegisterViewProps) {
 
       {user?.name && <Text className="text-base font-medium">{user.name}</Text>}
 
-      <AppInput />
+      <AppInput label="E-mail" />
+
+      <AppInput label="Senha" />
 
       <TouchableOpacity
         className="mt-5 bg-slate-900 w-max py-2 px-3 rounded-lg"
