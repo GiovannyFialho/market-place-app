@@ -28,6 +28,7 @@ export default function RegisterView({ onSubmit }: RegisterViewProps) {
         value={email}
         leftIcon="mail-outline"
         onChangeText={setEmail}
+        error="E-mail inválido"
       />
 
       <AppInput

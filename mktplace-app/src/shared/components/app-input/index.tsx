@@ -87,6 +87,12 @@ export function AppInput({
           <Ionicons name={rightIcon} size={22} />
         </TouchableOpacity>
       </Pressable>
+
+      {error && (
+        <Text className={styles.error()}>
+          <Ionicons name="alert-circle-outline" className="ml-2" /> {error}
+        </Text>
+      )}
     </View>
   );
 }
