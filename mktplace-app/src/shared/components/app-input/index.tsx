@@ -65,10 +65,19 @@ export function AppInput({
       <Text className={styles.label()}>{label}</Text>
 
       <Pressable className={styles.wrapper()}>
-        <Ionicons name={leftIcon} size={22} className="mr-3" />
+        {leftIcon && (
+          <Ionicons
+            color={getIconColor()}
+            name={leftIcon}
+            size={22}
+            className="mr-3"
+          />
+        )}
 
         <TextInput
+          value={value}
           className={styles.input()}
+          onChangeText={handleTextChange}
           onBlur={handleBlur}
           onFocus={handleFocus}
           {...textInputProps}
