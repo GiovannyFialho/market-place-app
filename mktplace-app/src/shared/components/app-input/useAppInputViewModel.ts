@@ -5,7 +5,6 @@ import { colors } from "../../../styles/colors";
 
 type AppInputViewModelProps = {
   value?: string;
-  error?: string;
   secureTextEntry?: boolean;
   isError?: boolean;
   isDisabled?: boolean;
@@ -17,7 +16,6 @@ type AppInputViewModelProps = {
 
 export function useAppInputViewModel({
   value,
-  error,
   secureTextEntry,
   isError,
   isDisabled,
@@ -50,8 +48,8 @@ export function useAppInputViewModel({
   }
 
   function getIconColor() {
-    if (isFocused) return colors["purple-base"];
     if (isError) return colors.danger;
+    if (isFocused) return colors["purple-base"];
     if (value) return colors["purple-base"];
 
     return colors.grays[200];
