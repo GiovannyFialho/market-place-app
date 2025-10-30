@@ -1,19 +1,15 @@
-import { useState } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 
 import { useUserStore } from "../../../shared/store/user-store";
 
 import { useRegisterViewModel } from "./useRegister.viewModel";
 
-import { AppInput } from "../../../shared/components/app-input";
+import { AppInputController } from "../../../shared/components/app-input-controller";
 
 type RegisterViewProps = ReturnType<typeof useRegisterViewModel>;
 
-export default function RegisterView({ onSubmit }: RegisterViewProps) {
+export default function RegisterView({ control, onSubmit }: RegisterViewProps) {
   const { user } = useUserStore();
-
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
 
   return (
     <View className="flex-1 items-center justify-center">
@@ -23,19 +19,11 @@ export default function RegisterView({ onSubmit }: RegisterViewProps) {
 
       {user?.name && <Text className="text-base font-medium">{user.name}</Text>}
 
-      <AppInput
-        label="E-mail"
-        value={email}
+      <AppInputController
+        control={control}
+        name="email"
+        label="E-MAIL"
         leftIcon="mail-outline"
-        onChangeText={setEmail}
-      />
-
-      <AppInput
-        label="Senha"
-        value={password}
-        secureTextEntry={true}
-        leftIcon="lock-closed-outline"
-        onChangeText={setPassword}
       />
 
       <TouchableOpacity
