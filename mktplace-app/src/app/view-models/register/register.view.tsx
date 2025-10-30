@@ -28,12 +28,12 @@ export default function RegisterView({ onSubmit }: RegisterViewProps) {
         value={email}
         leftIcon="mail-outline"
         onChangeText={setEmail}
-        error="E-mail inválido"
       />
 
       <AppInput
         label="Senha"
         value={password}
+        secureTextEntry={true}
         leftIcon="lock-closed-outline"
         onChangeText={setPassword}
       />

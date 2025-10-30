@@ -42,6 +42,7 @@ export function AppInput({
     getIconColor,
     handleWrapperPress,
     handlePasswordToggle,
+    showPassword,
     handleFocus,
     handleBlur,
     handleTextChange,
@@ -80,12 +81,18 @@ export function AppInput({
           onChangeText={handleTextChange}
           onBlur={handleBlur}
           onFocus={handleFocus}
+          secureTextEntry={showPassword}
           {...textInputProps}
         />
 
-        <TouchableOpacity>
-          <Ionicons name={rightIcon} size={22} />
-        </TouchableOpacity>
+        {secureTextEntry && (
+          <TouchableOpacity activeOpacity={0.7} onPress={handlePasswordToggle}>
+            <Ionicons
+              name={showPassword ? "eye-outline" : "eye-off-outline"}
+              size={22}
+            />
+          </TouchableOpacity>
+        )}
       </Pressable>
 
       {error && (
