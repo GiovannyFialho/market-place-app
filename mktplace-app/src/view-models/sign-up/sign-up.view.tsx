@@ -23,6 +23,7 @@ export default function SignUpView({ control, onSubmit }: SignUpViewProps) {
           label="NOME"
           control={control}
           name="name"
+          placeholder="Seu nome completo"
         />
 
         <AppInputController
@@ -30,12 +31,17 @@ export default function SignUpView({ control, onSubmit }: SignUpViewProps) {
           label="TELEFONE"
           control={control}
           name="phone"
+          placeholder="(00) 00000-0000"
         />
+
+        <Text className="text-base mt-6 font-bold text-gray-500">Acesso</Text>
+
         <AppInputController
           leftIcon="mail-outline"
           label="E-MAIL"
           control={control}
           name="email"
+          placeholder="mail@example.com.br"
         />
 
         <AppInputController
@@ -43,6 +49,7 @@ export default function SignUpView({ control, onSubmit }: SignUpViewProps) {
           label="SENHA"
           control={control}
           name="password"
+          placeholder="Sua senha"
           secureTextEntry
         />
 
@@ -51,6 +58,7 @@ export default function SignUpView({ control, onSubmit }: SignUpViewProps) {
           label="CONFIRMAR SENHA"
           control={control}
           name="confirmPassword"
+          placeholder="Confirme sua senha"
           secureTextEntry
         />
 

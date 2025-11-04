@@ -1,11 +1,15 @@
 import { router } from "expo-router";
 import { Text, TouchableOpacity, View } from "react-native";
 
-import { AppInput } from "../../shared/components/app-input";
+import { AppInputController } from "../../shared/components/app-input-controller";
 import { AuthFormHeader } from "../../shared/components/auth-form-header";
 import { KeyboardContainer } from "../../shared/components/keyboard-container";
 
-export function SignInView() {
+import { useSignInSchemaViewModel } from "./useSignIn.viewModel";
+
+type SignInViewProps = ReturnType<typeof useSignInSchemaViewModel>;
+
+export function SignInView({ control }: SignInViewProps) {
   return (
     <KeyboardContainer>
       <View className="items-center justify-center flex-1 px-[40px]">
@@ -14,8 +18,22 @@ export function SignInView() {
           title="Acesse sua conta"
         />
 
-        <AppInput label="E-mail" leftIcon="mail-outline" />
-        <AppInput label="Senha" leftIcon="lock-closed-outline" />
+        <AppInputController
+          leftIcon="mail-outline"
+          label="E-MAIL"
+          control={control}
+          placeholder="mail@example.com.br"
+          name="email"
+        />
+
+        <AppInputController
+          leftIcon="lock-closed-outline"
+          control={control}
+          name="password"
+          label="SENHA"
+          placeholder="Sua senha"
+          secureTextEntry
+        />
 
         <TouchableOpacity onPress={() => router.push("/sign-up")}>
           <Text>Registro</Text>
