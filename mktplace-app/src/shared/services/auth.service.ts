@@ -1,11 +1,11 @@
 import { marketPlaceAPIClient } from "../api/market-place";
 import type {
-  RegisterHttpParams,
-  RegisterHttpResponse,
-} from "../interfaces/http/register";
+  SignUpHttpParams,
+  SignUpHttpResponse,
+} from "../interfaces/http/sign-up";
 
-export async function register(userData: RegisterHttpParams) {
-  const { data } = await marketPlaceAPIClient.post<RegisterHttpResponse>(
+export async function signUp(userData: SignUpHttpParams) {
+  const { data } = await marketPlaceAPIClient.post<SignUpHttpResponse>(
     "/auth/register",
     userData
   );

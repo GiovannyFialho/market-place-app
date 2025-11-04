@@ -1,6 +1,6 @@
 import { UserInterface } from "../user";
 
-export interface RegisterHttpParams {
+export interface SignUpHttpParams {
   name: string;
   email: string;
   avatarUrl?: string;
@@ -8,7 +8,7 @@ export interface RegisterHttpParams {
   password: string;
 }
 
-export interface RegisterHttpResponse {
+export interface SignUpHttpResponse {
   user: UserInterface;
   token: string;
   refreshToken: string;

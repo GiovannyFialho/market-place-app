@@ -1,24 +1,21 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 
-import { useRegisterMutation } from "../../../shared/queries/auth/use-register.mutation";
-import { useUserStore } from "../../../shared/store/user-store";
+import { useSignUpMutation } from "../../shared/queries/auth/use-sign-up.mutation";
+import { useUserStore } from "../../shared/store/user-store";
 
-import {
-  registerSchema,
-  type RegisterSchema,
-} from "../register/register.scheme";
+import { signUpSchema, type SignUpSchema } from "./sign-up.scheme";
 
-export function useRegisterViewModel() {
-  const userRegisterMutation = useRegisterMutation();
+export function useSignUpSchemaViewModel() {
+  const userSignUpMutation = useSignUpMutation();
   const { setSession } = useUserStore();
 
   const {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<RegisterSchema>({
-    resolver: zodResolver(registerSchema),
+  } = useForm<SignUpSchema>({
+    resolver: zodResolver(signUpSchema),
     defaultValues: {
       name: "",
       email: "",
@@ -29,11 +26,9 @@ export function useRegisterViewModel() {
   });
 
   const onSubmit = handleSubmit(async (userData) => {
-    const { confirmPassword, ...registerData } = userData;
+    const { confirmPassword, ...signUpData } = userData;
 
-    const mutationResponse = await userRegisterMutation.mutateAsync(
-      registerData
-    );
+    const mutationResponse = await userSignUpMutation.mutateAsync(signUpData);
 
     setSession({
       user: mutationResponse.user,

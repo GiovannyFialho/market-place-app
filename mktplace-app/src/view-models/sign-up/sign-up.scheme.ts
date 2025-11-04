@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const registerSchema = z
+export const signUpSchema = z
   .object({
     name: z
       .string()
@@ -31,4 +31,4 @@ export const registerSchema = z
     }
   });
 
-export type RegisterSchema = z.infer<typeof registerSchema>;
+export type SignUpSchema = z.infer<typeof signUpSchema>;
