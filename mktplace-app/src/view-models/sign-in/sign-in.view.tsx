@@ -5,11 +5,16 @@ import { AppInputController } from "../../shared/components/app-input-controller
 import { AuthFormHeader } from "../../shared/components/auth-form-header";
 import { KeyboardContainer } from "../../shared/components/keyboard-container";
 
+import { useUserStore } from "../../shared/store/user-store";
 import { useSignInSchemaViewModel } from "./useSignIn.viewModel";
 
 type SignInViewProps = ReturnType<typeof useSignInSchemaViewModel>;
 
-export function SignInView({ control }: SignInViewProps) {
+export function SignInView({ control, onSubmit }: SignInViewProps) {
+  const { user } = useUserStore();
+
+  console.log({ user });
+
   return (
     <KeyboardContainer>
       <View className="items-center justify-center flex-1 px-[40px]">
@@ -34,6 +39,10 @@ export function SignInView({ control }: SignInViewProps) {
           placeholder="Sua senha"
           secureTextEntry
         />
+
+        <TouchableOpacity onPress={onSubmit}>
+          <Text>Login</Text>
+        </TouchableOpacity>
 
         <TouchableOpacity onPress={() => router.push("/sign-up")}>
           <Text>Registro</Text>
