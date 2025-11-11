@@ -1,8 +1,9 @@
 import { router } from "expo-router";
-import { ScrollView, Text, TouchableOpacity } from "react-native";
+import { ScrollView, Text, View } from "react-native";
 
 import { useSignUpSchemaViewModel } from "./useSignUp.viewModel";
 
+import { AppButton } from "../../shared/components/app-button";
 import { AppInputController } from "../../shared/components/app-input-controller";
 import { AuthFormHeader } from "../../shared/components/auth-form-header";
 import { KeyboardContainer } from "../../shared/components/keyboard-container";
@@ -62,19 +63,19 @@ export default function SignUpView({ control, onSubmit }: SignUpViewProps) {
           secureTextEntry
         />
 
-        <TouchableOpacity
-          className="mt-5 bg-slate-900 w-max py-2 px-3 rounded-lg"
-          onPress={onSubmit}
-        >
-          <Text className="text-lg font-bold text-white">Registrar</Text>
-        </TouchableOpacity>
+        <AppButton className="mt-6" onPress={onSubmit}>
+          Registrar
+        </AppButton>
 
-        <TouchableOpacity
-          className="mt-5"
-          onPress={() => router.push("/sign-in")}
-        >
-          <Text>Login</Text>
-        </TouchableOpacity>
+        <View className="mt-16">
+          <Text className="text-base mb-6 text-gray-300">
+            Já tem uma conta?
+          </Text>
+
+          <AppButton variant="outlined" onPress={() => router.push("/sign-in")}>
+            Login
+          </AppButton>
+        </View>
       </ScrollView>
     </KeyboardContainer>
   );

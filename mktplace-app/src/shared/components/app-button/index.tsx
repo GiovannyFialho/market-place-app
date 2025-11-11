@@ -25,6 +25,7 @@ export function AppButton({
   isLoading,
   isDisabled,
   variant = "filled",
+  className,
   ...rest
 }: AppButtonProps) {
   const styles = buttonVariants({
@@ -58,7 +59,7 @@ export function AppButton({
   };
 
   return (
-    <TouchableOpacity className={styles.base()} {...rest}>
+    <TouchableOpacity className={styles.base({ className })} {...rest}>
       {renderContent()}
     </TouchableOpacity>
   );
