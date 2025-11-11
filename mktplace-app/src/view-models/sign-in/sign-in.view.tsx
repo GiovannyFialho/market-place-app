@@ -1,6 +1,7 @@
 import { router } from "expo-router";
-import { Text, TouchableOpacity, View } from "react-native";
+import { View } from "react-native";
 
+import { AppButton } from "../../shared/components/app-button";
 import { AppInputController } from "../../shared/components/app-input-controller";
 import { AuthFormHeader } from "../../shared/components/auth-form-header";
 import { KeyboardContainer } from "../../shared/components/keyboard-container";
@@ -40,13 +41,9 @@ export function SignInView({ control, onSubmit }: SignInViewProps) {
           secureTextEntry
         />
 
-        <TouchableOpacity onPress={onSubmit}>
-          <Text>Login</Text>
-        </TouchableOpacity>
+        <AppButton onPress={onSubmit}>Login</AppButton>
 
-        <TouchableOpacity onPress={() => router.push("/sign-up")}>
-          <Text>Registro</Text>
-        </TouchableOpacity>
+        <AppButton onPress={() => router.push("/sign-up")}>Registro</AppButton>
       </View>
     </KeyboardContainer>
   );
