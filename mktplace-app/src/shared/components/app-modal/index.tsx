@@ -3,7 +3,7 @@ import { Modal, TouchableWithoutFeedback, View } from "react-native";
 import { useModalStore } from "../../store/modal-store";
 
 export function AppModal() {
-  const { isOpen, content, config, open, close } = useModalStore();
+  const { isOpen, content, config, close } = useModalStore();
 
   if (!isOpen || !content) {
     return null;
