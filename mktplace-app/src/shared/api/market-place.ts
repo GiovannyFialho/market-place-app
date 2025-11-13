@@ -6,7 +6,7 @@ export class MarketPlaceAPIClient {
 
   constructor() {
     this.instance = axios.create({
-      baseURL: "http://192.168.68.108:3001",
+      baseURL: "http://192.168.68.106:3001",
     });
   }
 
