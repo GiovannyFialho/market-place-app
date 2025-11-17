@@ -1,5 +1,6 @@
+import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
-import { ScrollView, Text, View } from "react-native";
+import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 
 import { useSignUpSchemaViewModel } from "./useSignUp.viewModel";
 
@@ -10,7 +11,11 @@ import { KeyboardContainer } from "../../shared/components/keyboard-container";
 
 type SignUpViewProps = ReturnType<typeof useSignUpSchemaViewModel>;
 
-export default function SignUpView({ control, onSubmit }: SignUpViewProps) {
+export default function SignUpView({
+  control,
+  onSubmit,
+  handleSelectAvatar,
+}: SignUpViewProps) {
   return (
     <KeyboardContainer>
       <ScrollView className="flex-1 px-[40px]">
@@ -18,6 +23,10 @@ export default function SignUpView({ control, onSubmit }: SignUpViewProps) {
           title="Crie sua conta"
           subTitle="Informe seus dados pessoais e de acesso"
         />
+
+        <TouchableOpacity onPress={handleSelectAvatar}>
+          <Ionicons name="cloud-upload-outline" size={32} />
+        </TouchableOpacity>
 
         <AppInputController
           leftIcon="person-outline"
