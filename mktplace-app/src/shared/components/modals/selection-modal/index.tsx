@@ -1,12 +1,18 @@
 import { Ionicons } from "@expo/vector-icons";
+import clsx from "clsx";
 import { Text, TouchableOpacity, View } from "react-native";
 
-import type { SelectionOptions } from "../../../hooks/useAppModal";
+import type {
+  SelectionOption,
+  SelectionVariant,
+} from "../../../hooks/useAppModal";
+
+import { colors } from "../../../../styles/colors";
 
 export interface SelectionModalProps {
   title: string;
   message?: string;
-  options: SelectionOptions[];
+  options: SelectionOption[];
 }
 
 export const SelectionModal = ({
@@ -14,20 +20,39 @@ export const SelectionModal = ({
   message,
   options,
 }: SelectionModalProps) => {
+  const getButtonClass = (variant: SelectionVariant) =>
+    clsx(
+      "w-full py-3 px-4 rounded-lg items-center flex-row justify-center mb-2",
+      {
+        "bg-danger": variant === "danger",
+        "bg-blue-dark": variant === "secondary",
+        "bg-purple-base": variant === "primary",
+      }
+    );
+
   return (
     <View className="bg-white rounded-xl shadow-2xl w-[85%] mx-auto max-w-sm p-6">
-      <Text>{title}</Text>
-      {message && <Text>{message}</Text>}
+      <View className="items-center">
+        <Text className="text-lg font-bold text-gray-900 mb-3">{title}</Text>
+        {message && (
+          <Text className="text-base text-gray-600 mb-6 leading-6">
+            {message}
+          </Text>
+        )}
+      </View>
 
-      <View>
+      <View className="gap-3">
         {options.map((option) => (
           <TouchableOpacity
-            className="w-full py-3 px-4 rounded-lg items-center flex-row justify-center mb-2"
             key={option.text}
+            className={getButtonClass(option.variant ?? "primary")}
             onPress={option.onPress}
           >
-            {option.icon && <Ionicons name={option.icon} size={24} />}
-            <Text>{option.text}</Text>
+            {option.icon && (
+              <Ionicons name={option.icon} size={24} color={colors.white} />
+            )}
+
+            <Text className="font-semibold text-white">{option.text}</Text>
           </TouchableOpacity>
         ))}
       </View>

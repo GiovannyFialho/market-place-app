@@ -8,11 +8,12 @@ import {
   type SelectionModalProps,
 } from "../components/modals/selection-modal";
 
+export type SelectionVariant = "primary" | "secondary" | "danger";
 export interface SelectionOption {
   text: string;
   onPress: () => void;
   icon?: keyof typeof Ionicons.glyphMap;
-  variant?: "primary" | "secondary" | "danger";
+  variant?: SelectionVariant;
 }
 
 export const useAppModal = () => {
