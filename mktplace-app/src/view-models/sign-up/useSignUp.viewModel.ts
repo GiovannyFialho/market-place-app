@@ -5,6 +5,7 @@ import { useSignUpMutation } from "../../shared/queries/auth/use-sign-up.mutatio
 import { useUserStore } from "../../shared/store/user-store";
 
 import { useAppModal } from "../../shared/hooks/useAppModal";
+import { useCamera } from "../../shared/hooks/useCamera";
 
 import { signUpSchema, type SignUpSchema } from "./sign-up.scheme";
 
@@ -13,6 +14,7 @@ export function useSignUpSchemaViewModel() {
   const { setSession } = useUserStore();
 
   const modals = useAppModal();
+  const { openCamera } = useCamera({});
 
   const {
     control,
@@ -44,7 +46,7 @@ export function useSignUpSchemaViewModel() {
           text: "Câmera",
           icon: "camera",
           variant: "primary",
-          onPress: () => alert("Câmera"),
+          onPress: openCamera,
         },
       ],
     });
