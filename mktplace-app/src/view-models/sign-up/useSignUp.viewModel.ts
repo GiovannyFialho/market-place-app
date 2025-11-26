@@ -4,9 +4,7 @@ import { useForm } from "react-hook-form";
 import { useSignUpMutation } from "../../shared/queries/auth/use-sign-up.mutation";
 import { useUserStore } from "../../shared/store/user-store";
 
-import { useAppModal } from "../../shared/hooks/useAppModal";
-import { useCamera } from "../../shared/hooks/useCamera";
-import { useGallery } from "../../shared/hooks/useGallery";
+import { useImage } from "../../shared/hooks/useImage";
 
 import { signUpSchema, type SignUpSchema } from "./sign-up.scheme";
 
@@ -14,9 +12,7 @@ export function useSignUpSchemaViewModel() {
   const userSignUpMutation = useSignUpMutation();
   const { setSession } = useUserStore();
 
-  const modals = useAppModal();
-  const { openCamera } = useCamera({});
-  const { openGallery } = useGallery({});
+  const { handleSelectImage } = useImage();
 
   const {
     control,
@@ -33,25 +29,8 @@ export function useSignUpSchemaViewModel() {
     },
   });
 
-  function handleSelectAvatar() {
-    modals.showSelection({
-      title: "Selecionar foto",
-      message: "Escolha uma opção:",
-      options: [
-        {
-          text: "Galeria",
-          icon: "images",
-          variant: "primary",
-          onPress: openGallery,
-        },
-        {
-          text: "Câmera",
-          icon: "camera",
-          variant: "primary",
-          onPress: openCamera,
-        },
-      ],
-    });
+  async function handleSelectAvatar() {
+    await handleSelectImage();
   }
 
   const onSubmit = handleSubmit(async (userData) => {

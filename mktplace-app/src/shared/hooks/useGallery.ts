@@ -3,8 +3,8 @@ import * as ImagePicker from "expo-image-picker";
 import { useCallback, useState } from "react";
 import { Toast } from "toastify-react-native";
 
-export const useGallery = (pickerOptions: ImagePickerOptions) => {
-  const [loading, setLoading] = useState(false);
+export function useGallery(pickerOptions: ImagePickerOptions) {
+  const [isLoading, setIsLoading] = useState(false);
 
   const requestGalleryPermission = useCallback(async () => {
     try {
@@ -25,7 +25,7 @@ export const useGallery = (pickerOptions: ImagePickerOptions) => {
   }, []);
 
   const openGallery = useCallback(async (): Promise<string | null> => {
-    setLoading(true);
+    setIsLoading(true);
 
     try {
       const hasPermission = await requestGalleryPermission();
@@ -45,9 +45,9 @@ export const useGallery = (pickerOptions: ImagePickerOptions) => {
 
       return null;
     } finally {
-      setLoading(false);
+      setIsLoading(false);
     }
   }, []);
 
-  return { openGallery, loading };
-};
+  return { openGallery, isLoading };
+}

@@ -3,7 +3,7 @@ import * as ImagePicker from "expo-image-picker";
 import { useCallback, useState } from "react";
 import { Toast } from "toastify-react-native";
 
-export const useCamera = (pickerOptions: ImagePickerOptions) => {
+export function useCamera(pickerOptions: ImagePickerOptions) {
   const [isLoading, setIsLoading] = useState(false);
 
   const requestCameraPermission = useCallback(async (): Promise<boolean> => {
@@ -54,4 +54,4 @@ export const useCamera = (pickerOptions: ImagePickerOptions) => {
     isLoading,
     openCamera,
   };
-};
+}
