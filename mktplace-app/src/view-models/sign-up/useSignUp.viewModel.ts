@@ -6,6 +6,7 @@ import { useUserStore } from "../../shared/store/user-store";
 
 import { useAppModal } from "../../shared/hooks/useAppModal";
 import { useCamera } from "../../shared/hooks/useCamera";
+import { useGallery } from "../../shared/hooks/useGallery";
 
 import { signUpSchema, type SignUpSchema } from "./sign-up.scheme";
 
@@ -15,6 +16,7 @@ export function useSignUpSchemaViewModel() {
 
   const modals = useAppModal();
   const { openCamera } = useCamera({});
+  const { openGallery } = useGallery({});
 
   const {
     control,
@@ -40,7 +42,7 @@ export function useSignUpSchemaViewModel() {
           text: "Galeria",
           icon: "images",
           variant: "primary",
-          onPress: () => alert("Galeria"),
+          onPress: openGallery,
         },
         {
           text: "Câmera",
