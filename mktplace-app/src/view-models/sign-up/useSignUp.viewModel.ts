@@ -6,13 +6,18 @@ import { useUserStore } from "../../shared/store/user-store";
 
 import { useImage } from "../../shared/hooks/useImage";
 
+import { useState } from "react";
 import { signUpSchema, type SignUpSchema } from "./sign-up.scheme";
 
 export function useSignUpSchemaViewModel() {
   const userSignUpMutation = useSignUpMutation();
   const { setSession } = useUserStore();
 
-  const { handleSelectImage } = useImage();
+  const [avatarUri, setAvatarUri] = useState<string | null>(null);
+
+  const { handleSelectImage } = useImage({
+    callback: setAvatarUri,
+  });
 
   const {
     control,
