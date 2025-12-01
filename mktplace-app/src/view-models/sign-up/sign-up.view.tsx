@@ -1,6 +1,6 @@
 import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
-import { ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
 
 import { useSignUpSchemaViewModel } from "./useSignUp.viewModel";
 
@@ -15,6 +15,7 @@ export default function SignUpView({
   control,
   onSubmit,
   handleSelectAvatar,
+  avatarUri,
 }: SignUpViewProps) {
   return (
     <KeyboardContainer>
@@ -24,8 +25,19 @@ export default function SignUpView({
           subTitle="Informe seus dados pessoais e de acesso"
         />
 
-        <TouchableOpacity onPress={handleSelectAvatar}>
-          <Ionicons name="cloud-upload-outline" size={32} />
+        <TouchableOpacity
+          className="w-[120px] h-[120px] rounded-xl items-center justify-center bg-shape self-center mb-8"
+          onPress={handleSelectAvatar}
+        >
+          {avatarUri ? (
+            <Image
+              source={{ uri: avatarUri }}
+              className="w-full h-full rounded-xl"
+              resizeMode="cover"
+            />
+          ) : (
+            <Ionicons name="cloud-upload-outline" size={32} />
+          )}
         </TouchableOpacity>
 
         <AppInputController

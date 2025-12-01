@@ -1,4 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import { CameraType } from "expo-image-picker";
 import { useForm } from "react-hook-form";
 
 import { useSignUpMutation } from "../../shared/queries/auth/use-sign-up.mutation";
@@ -17,6 +18,7 @@ export function useSignUpSchemaViewModel() {
 
   const { handleSelectImage } = useImage({
     callback: setAvatarUri,
+    cameraType: CameraType.front,
   });
 
   const {
@@ -50,5 +52,5 @@ export function useSignUpSchemaViewModel() {
     });
   });
 
-  return { control, errors, onSubmit, handleSelectAvatar };
+  return { control, errors, onSubmit, handleSelectAvatar, avatarUri };
 }
