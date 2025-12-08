@@ -1,12 +1,14 @@
 import axios, { type AxiosInstance } from "axios";
 
+export const baseURL = "http://192.168.68.103:3001";
+
 export class MarketPlaceAPIClient {
   private instance: AxiosInstance;
   private isRefreshing = false;
 
   constructor() {
     this.instance = axios.create({
-      baseURL: "http://192.168.68.105:3001",
+      baseURL,
     });
   }
 
