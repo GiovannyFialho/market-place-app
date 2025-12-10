@@ -1,7 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios, { type AxiosInstance } from "axios";
 
-export const baseURL = "http://192.168.68.103:3001";
+export const baseURL = "http://192.168.68.105:3001";
 
 export class MarketPlaceAPIClient {
   private instance: AxiosInstance;
@@ -24,14 +24,10 @@ export class MarketPlaceAPIClient {
       async (config) => {
         const userData = await AsyncStorage.getItem("marketplace-auth");
 
-        console.log({ userData });
-
         if (userData) {
           const {
             state: { token },
           } = JSON.parse(userData);
-
-          console.log({ token });
 
           if (token) {
             config.headers.Authorization = `Bearer ${token}`;

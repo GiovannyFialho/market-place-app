@@ -22,8 +22,6 @@ export function useSignInSchemaViewModel() {
 
   const onSubmit = handleSubmit(async (userFormData) => {
     const userData = await signInMutation.mutateAsync(userFormData);
-
-    console.log({ userData });
   });
 
   return { control, onSubmit, errors };

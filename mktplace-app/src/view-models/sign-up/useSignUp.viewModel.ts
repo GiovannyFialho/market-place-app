@@ -8,11 +8,11 @@ import { useUserStore } from "../../shared/store/user-store";
 import { useImage } from "../../shared/hooks/useImage";
 
 import { useState } from "react";
+import { useUploadAvatarMutation } from "../../shared/queries/auth/use-upload-avatar.mutation";
 import { signUpSchema, type SignUpSchema } from "./sign-up.scheme";
 
 export function useSignUpSchemaViewModel() {
-  const userSignUpMutation = useSignUpMutation();
-  const { setSession } = useUserStore();
+  const { updateUser } = useUserStore();
 
   const [avatarUri, setAvatarUri] = useState<string | null>(null);
 
@@ -40,16 +40,24 @@ export function useSignUpSchemaViewModel() {
     await handleSelectImage();
   }
 
+  const uploadAvatarMutation = useUploadAvatarMutation();
+
+  const userSignUpMutation = useSignUpMutation({
+    onSuccess: async () => {
+      if (avatarUri) {
+        const { url } = await uploadAvatarMutation.mutateAsync(avatarUri);
+
+        console.log({ url });
+
+        updateUser({ avatarUrl: url });
+      }
+    },
+  });
+
   const onSubmit = handleSubmit(async (userData) => {
     const { confirmPassword, ...signUpData } = userData;
 
-    const mutationResponse = await userSignUpMutation.mutateAsync(signUpData);
-
-    setSession({
-      user: mutationResponse.user,
-      token: mutationResponse.token,
-      refreshToken: mutationResponse.refreshToken,
-    });
+    await userSignUpMutation.mutateAsync(signUpData);
   });
 
   return { control, errors, onSubmit, handleSelectAvatar, avatarUri };

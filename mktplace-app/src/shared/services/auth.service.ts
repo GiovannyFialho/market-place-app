@@ -40,6 +40,8 @@ export const uploadAvatar = async (avatarUri: string) => {
     formData
   );
 
+  console.log({ url: data.url });
+
   data.url = `${baseURL}${data.url}`;
 
   return data;
