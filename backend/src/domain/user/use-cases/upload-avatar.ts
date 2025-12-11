@@ -1,14 +1,14 @@
-import { pipeline } from "stream";
-import { promisify } from "util";
+import { randomUUID } from "crypto";
 import fs from "fs";
 import path from "path";
-import { randomUUID } from "crypto";
+import { pipeline } from "stream";
+import { promisify } from "util";
+import { UserAvatarRepository } from "../../../infra/database/typeorm/market-place/repositories/user-avatar.repository";
 import {
   IUploadUserAvatarUseCase,
   UploadUserAvatarRequest,
   UploadUserAvatarResponse,
 } from "../repositoryInterface/upload-user-avatar.interface";
-import { UserAvatarRepository } from "../../../infra/database/typeorm/market-place/repositories/user-avatar.repository";
 
 const pump = promisify(pipeline);
 
@@ -29,7 +29,10 @@ export class UploadUserAvatarUseCase implements IUploadUserAvatarUseCase {
       "image/png",
       "image/gif",
       "image/webp",
+      "image/heic",
+      "image/heif",
     ];
+
     if (!allowedMimeTypes.includes(file.mimetype)) {
       throw new Error(
         "Formato de arquivo não suportado. Use JPEG, PNG, GIF ou WebP"
@@ -37,7 +40,23 @@ export class UploadUserAvatarUseCase implements IUploadUserAvatarUseCase {
     }
 
     try {
-      const fileExtension = path.extname(file.filename || "");
+      let fileExtension = path.extname(
+        file.originalname || file.filename || ""
+      );
+
+      if (!fileExtension) {
+        const mimeMap: Record<string, string> = {
+          "image/jpeg": ".jpg",
+          "image/png": ".png",
+          "image/gif": ".gif",
+          "image/webp": ".webp",
+          "image/heic": ".heic",
+          "image/heif": ".heif",
+        };
+
+        fileExtension = mimeMap[file.mimetype] ?? ".jpg";
+      }
+
       const fileName = `${randomUUID()}${fileExtension}`;
 
       const uploadDir = path.join(process.cwd(), "src/assets/images/avatars");

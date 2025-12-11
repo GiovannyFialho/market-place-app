@@ -25,7 +25,7 @@ export function useSignUpMutation({
       onSuccess?.();
     },
     onError: (error) => {
-      console.log({ error });
+      console.log("signUp error:::: ", error);
     },
   });
 
