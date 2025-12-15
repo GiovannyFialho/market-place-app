@@ -1,16 +1,17 @@
 import { Redirect, Stack } from "expo-router";
+
 import { useUserStore } from "../../shared/store/user-store";
 
-export default function PrivateLayout() {
+export default function PublicLayout() {
   const { user, token } = useUserStore();
 
-  if (!user || !token) {
-    return <Redirect href="/(public)/sign-in" />;
+  if (user && token) {
+    return <Redirect href="/(private)/home" />;
   }
 
   return (
     <Stack screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="home" />
+      <Stack.Screen name="sign-in" />
     </Stack>
   );
 }

@@ -93,7 +93,10 @@ export default function SignUpView({
             Já tem uma conta?
           </Text>
 
-          <AppButton variant="outlined" onPress={() => router.push("/sign-in")}>
+          <AppButton
+            variant="outlined"
+            onPress={() => router.push("/(public)/sign-in")}
+          >
             Login
           </AppButton>
         </View>

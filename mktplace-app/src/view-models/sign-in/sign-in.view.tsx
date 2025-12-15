@@ -50,7 +50,7 @@ export function SignInView({ control, onSubmit }: SignInViewProps) {
           <AppButton
             variant="outlined"
             rightIcon="arrow-forward"
-            onPress={() => router.push("/sign-up")}
+            onPress={() => router.push("/(public)/sign-up")}
           >
             Registro
           </AppButton>
