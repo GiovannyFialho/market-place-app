@@ -1,10 +1,10 @@
-import { UserTypeormRepository } from "../../../infra/database/typeorm/market-place/repositories/user.repository";
-import { RefreshTokenRepository } from "../../../infra/database/typeorm/market-place/repositories/refresh-token.repository";
 import { compare } from "bcrypt";
-import { AuthLoginRequest } from "../interfaces/authLoginRequest";
+import { RefreshTokenRepository } from "../../../infra/database/typeorm/market-place/repositories/refresh-token.repository";
+import { UserTypeormRepository } from "../../../infra/database/typeorm/market-place/repositories/user.repository";
 import { NotFoundError } from "../../../shared/errors/not-found.error";
 import { UnauthenticatedError } from "../../../shared/errors/unauthenticated.error";
 import { JWTService } from "../../../shared/services/jwt.service";
+import { AuthLoginRequest } from "../interfaces/authLoginRequest";
 
 export class AuthenticateUseCase {
   private authRepository: UserTypeormRepository;
@@ -48,7 +48,10 @@ export class AuthenticateUseCase {
     return {
       token: accessToken,
       refreshToken,
-      user,
+      user: {
+        ...user,
+        avatarUrl: user.avatar.url,
+      },
     };
   }
 }
