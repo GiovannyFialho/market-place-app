@@ -8,6 +8,7 @@ import {
   View,
 } from "react-native";
 
+import { type AppInputType, INPUT_TYPE_CONFIG } from "./input.types";
 import { appInputVariants, type appInputVariantsProps } from "./input.variants";
 
 import { useAppInputViewModel } from "./useAppInputViewModel";
@@ -19,6 +20,7 @@ export type AppInputProps = {
   containerClassName?: string;
   mask?: (value: string) => void | string;
   error?: string;
+  inputType?: AppInputType;
 } & TextInputProps &
   appInputVariantsProps;
 
@@ -36,6 +38,7 @@ export function AppInput({
   onChangeText,
   error,
   isDisabled,
+  inputType = "text",
   ...textInputProps
 }: AppInputProps) {
   const {
@@ -60,6 +63,8 @@ export function AppInput({
 
   const styles = appInputVariants({ isFocused, isError: !!error, isDisabled });
 
+  const inputTypeProps = INPUT_TYPE_CONFIG[inputType];
+
   return (
     <View className={styles.container({ className: containerClassName })}>
       <Text className={styles.label()}>{label}</Text>
@@ -81,6 +86,7 @@ export function AppInput({
           onBlur={handleBlur}
           onFocus={handleFocus}
           secureTextEntry={showPassword}
+          {...inputTypeProps}
           {...textInputProps}
         />
 

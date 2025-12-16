@@ -21,6 +21,7 @@ export function SignInView({ control, onSubmit }: SignInViewProps) {
           />
 
           <AppInputController
+            inputType="email"
             leftIcon="mail-outline"
             label="E-MAIL"
             control={control}

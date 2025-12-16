@@ -49,6 +49,7 @@ export default function SignUpView({
         />
 
         <AppInputController
+          inputType="number"
           leftIcon="call-outline"
           label="TELEFONE"
           control={control}
@@ -59,6 +60,7 @@ export default function SignUpView({
         <Text className="text-base mt-6 font-bold text-gray-500">Acesso</Text>
 
         <AppInputController
+          inputType="email"
           leftIcon="mail-outline"
           label="E-MAIL"
           control={control}
