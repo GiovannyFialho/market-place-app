@@ -25,7 +25,10 @@ export function HomeHeader() {
         </View>
 
         <View>
-          <Text>Olá, {user?.name.split(" ")[0]}</Text>
+          <Text className="font-bold text-base">
+            Olá, {user?.name.split(" ")[0] || "Usuário"}
+          </Text>
+
           <View className="flex-row items-center gap-2">
             <Text className="color-purple-base font-bold text-sm">
               Ver perfil

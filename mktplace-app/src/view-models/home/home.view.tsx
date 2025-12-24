@@ -2,6 +2,7 @@ import { FlatList } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { HomeHeader } from "./components/home-header";
+import { SearchInput } from "./components/search-input";
 
 export function Home() {
   return (
@@ -9,7 +10,12 @@ export function Home() {
       <FlatList
         data={[]}
         renderItem={() => <></>}
-        ListHeaderComponent={<HomeHeader />}
+        ListHeaderComponent={
+          <>
+            <HomeHeader />
+            <SearchInput />
+          </>
+        }
         contentContainerClassName="px-[16px] pb-[120px]"
       />
     </SafeAreaView>
