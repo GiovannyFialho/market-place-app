@@ -17,7 +17,7 @@ export function SearchInput() {
           />
         </View>
 
-        <TouchableOpacity className="ml-5 mt-6 items-center justify-center rounded-lg border h-[48px] w-[48px] border-purple-base">
+        <TouchableOpacity className="ml-5 mt-6 items-center justify-center rounded-lg border size-[48px] border-purple-base">
           <Ionicons
             name="filter-outline"
             size={24}
