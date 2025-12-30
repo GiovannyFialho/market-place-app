@@ -3,11 +3,13 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import { ProductInterface } from "../../shared/interfaces/product";
 
+import { useHomeViewModel } from "./home.model";
+
 import { HomeHeader } from "./components/home-header";
 import { ProductCard } from "./components/product-card";
 import { SearchInput } from "./components/search-input";
 
-export function Home() {
+export function Home({}: ReturnType<typeof useHomeViewModel>) {
   const productsList: ProductInterface[] = [
     {
       id: 1,
@@ -35,6 +37,8 @@ export function Home() {
         data={productsList}
         renderItem={({ item }) => <ProductCard product={item} />}
         keyExtractor={({ id }) => `product-list-item-${id}`}
+        numColumns={2}
+        columnWrapperStyle={{ justifyContent: "space-between" }}
         ListHeaderComponent={
           <>
             <HomeHeader />

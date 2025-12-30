@@ -47,8 +47,6 @@ export function useSignUpSchemaViewModel() {
       if (avatarUri) {
         const { url } = await uploadAvatarMutation.mutateAsync(avatarUri);
 
-        console.log({ url });
-
         updateUser({ avatarUrl: url });
       }
     },

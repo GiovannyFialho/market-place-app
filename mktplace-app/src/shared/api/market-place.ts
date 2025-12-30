@@ -45,8 +45,6 @@ export class MarketPlaceAPIClient {
     this.instance.interceptors.response.use(
       (response) => response,
       async (error) => {
-        alert("Caiu no refresh");
-
         const originalRequest = error.config;
 
         if (
