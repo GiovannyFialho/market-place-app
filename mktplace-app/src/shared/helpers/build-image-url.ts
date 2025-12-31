@@ -1,13 +1,13 @@
 import Constants from "expo-constants";
-import { Platform } from "react-native";
+
+import { baseURL } from "../api/market-place";
 
 export function buildImageURL(originalURL: string) {
   if (Constants.expoConfig?.extra?.isProduction) {
     return originalURL;
   }
 
-  return Platform.select({
-    android: originalURL.replace("localhost", "10.0.2.2"),
-    ios: originalURL,
-  });
+  const updatedURL = originalURL.replace(/^http:\/\/localhost:3001/, baseURL);
+
+  return updatedURL;
 }

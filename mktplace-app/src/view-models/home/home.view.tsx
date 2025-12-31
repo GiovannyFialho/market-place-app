@@ -1,44 +1,27 @@
 import { FlatList } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import { ProductInterface } from "../../shared/interfaces/product";
-
 import { useHomeViewModel } from "./home.model";
 
 import { HomeHeader } from "./components/home-header";
 import { ProductCard } from "./components/product-card";
 import { SearchInput } from "./components/search-input";
 
-export function Home({}: ReturnType<typeof useHomeViewModel>) {
-  const productsList: ProductInterface[] = [
-    {
-      id: 1,
-      value: "100",
-      name: "Product 1",
-      description: "Description 1",
-      photo: "https://via.placeholder.com/150",
-      height: "100",
-      width: "100",
-      weight: "100",
-      averageRating: 1,
-      views: 1,
-      ratingCount: 1,
-      categoryId: 1,
-      category: { id: 1, name: "Category 1" },
-      createdAt: "2021-01-01",
-      updatedAt: "2021-01-01",
-      deletedAt: "2021-01-01",
-    },
-  ];
-
+export function Home({
+  products,
+  handleEndReached,
+}: ReturnType<typeof useHomeViewModel>) {
   return (
     <SafeAreaView edges={["top"]} className="flex-1">
       <FlatList
-        data={productsList}
+        data={products}
         renderItem={({ item }) => <ProductCard product={item} />}
         keyExtractor={({ id }) => `product-list-item-${id}`}
         numColumns={2}
-        columnWrapperStyle={{ justifyContent: "space-between" }}
+        onEndReached={handleEndReached}
+        columnWrapperStyle={{
+          justifyContent: "space-between",
+        }}
         ListHeaderComponent={
           <>
             <HomeHeader />

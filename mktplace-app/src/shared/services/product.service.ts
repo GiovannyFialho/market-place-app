@@ -4,9 +4,10 @@ import { ProductRequest } from "../interfaces/http/product";
 import type { ProductResponse } from "../interfaces/http/product-response";
 
 export const getProducts = async (params: ProductRequest) => {
-  const { data } = await marketPlaceAPIClient.get<ProductResponse>(
+  const { data } = await marketPlaceAPIClient.post<ProductResponse>(
     "/products",
-    { params }
+    params
   );
+
   return data;
 };
