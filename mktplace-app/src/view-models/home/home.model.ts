@@ -16,12 +16,12 @@ export function useHomeViewModel() {
     }
   }
 
-  function handleEndReached() {
-    handleLoadMore();
-  }
-
   async function handleRefresh() {
     await refetch();
+  }
+
+  function handleEndReached() {
+    handleLoadMore();
   }
 
   return { products, handleLoadMore, handleRefresh, handleEndReached };
