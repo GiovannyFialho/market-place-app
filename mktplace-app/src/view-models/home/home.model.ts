@@ -24,5 +24,13 @@ export function useHomeViewModel() {
     handleLoadMore();
   }
 
-  return { products, handleLoadMore, handleRefresh, handleEndReached };
+  return {
+    products,
+    isLoading,
+    hasNextPage,
+    isFetchingNextPage,
+    handleLoadMore,
+    handleRefresh,
+    handleEndReached,
+  };
 }

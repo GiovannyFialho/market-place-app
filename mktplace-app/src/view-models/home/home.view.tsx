@@ -3,12 +3,16 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import { useHomeViewModel } from "./home.model";
 
+import { Footer } from "./components/footer";
 import { HomeHeader } from "./components/home-header";
 import { ProductCard } from "./components/product-card";
 import { SearchInput } from "./components/search-input";
 
 export function Home({
   products,
+  isLoading,
+  hasNextPage,
+  isFetchingNextPage,
   handleEndReached,
 }: ReturnType<typeof useHomeViewModel>) {
   return (
@@ -27,6 +31,11 @@ export function Home({
             <HomeHeader />
             <SearchInput />
           </>
+        }
+        ListFooterComponent={
+          <Footer
+            isLoading={hasNextPage || Boolean(isFetchingNextPage || isLoading)}
+          />
         }
         contentContainerClassName="px-[16px] pb-[120px]"
       />
