@@ -1,4 +1,4 @@
-import { FlatList } from "react-native";
+import { FlatList, RefreshControl } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { useHomeViewModel } from "./home.model";
@@ -8,17 +8,22 @@ import { HomeHeader } from "./components/home-header";
 import { ProductCard } from "./components/product-card";
 import { SearchInput } from "./components/search-input";
 
+import { colors } from "../../styles/colors";
+
 export function Home({
   products,
   isLoading,
   hasNextPage,
   isFetchingNextPage,
+  isRefetching,
   handleEndReached,
+  handleRefresh,
 }: ReturnType<typeof useHomeViewModel>) {
   return (
     <SafeAreaView edges={["top"]} className="flex-1">
       <FlatList
         data={products}
+        contentContainerClassName="px-[16px] pb-[120px]"
         renderItem={({ item }) => <ProductCard product={item} />}
         keyExtractor={({ id }) => `product-list-item-${id}`}
         numColumns={2}
@@ -26,6 +31,14 @@ export function Home({
         columnWrapperStyle={{
           justifyContent: "space-between",
         }}
+        refreshControl={
+          <RefreshControl
+            refreshing={isRefetching}
+            colors={[colors["purple-base"]]}
+            tintColor={colors["purple-base"]}
+            onRefresh={handleRefresh}
+          />
+        }
         ListHeaderComponent={
           <>
             <HomeHeader />
@@ -37,7 +50,6 @@ export function Home({
             isLoading={hasNextPage || Boolean(isFetchingNextPage || isLoading)}
           />
         }
-        contentContainerClassName="px-[16px] pb-[120px]"
       />
     </SafeAreaView>
   );

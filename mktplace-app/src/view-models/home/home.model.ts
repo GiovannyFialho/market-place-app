@@ -8,6 +8,7 @@ export function useHomeViewModel() {
     isLoading,
     fetchNextPage,
     refetch,
+    isRefetching,
   } = useProductInfiniteQuery();
 
   function handleLoadMore() {
@@ -29,6 +30,7 @@ export function useHomeViewModel() {
     isLoading,
     hasNextPage,
     isFetchingNextPage,
+    isRefetching,
     handleLoadMore,
     handleRefresh,
     handleEndReached,
