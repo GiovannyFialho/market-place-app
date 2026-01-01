@@ -5,21 +5,41 @@ import BottomSheet, {
 } from "@gorhom/bottom-sheet";
 import { useCallback, useEffect, useMemo, useRef } from "react";
 
-import { colors } from "../../../styles/colors";
 import { useBottomSheetStore } from "../../store/bottom-sheet-store";
 
-export function AppBottomSheet() {
-  const { config, content, isOpen, close } = useBottomSheetStore();
+import { colors } from "../../../styles/colors";
+
+export const AppBottomSheet = () => {
+  const { content, close, isOpen, config } = useBottomSheetStore();
 
   const bottomSheetRef = useRef<BottomSheet>(null);
 
   const snapPoints = useMemo(
     () => config?.snapPoints || ["80%", "90%"],
-    [config.snapPoints]
+    [config?.snapPoints]
   );
 
-  const renderBackdrop = useCallback(
-    (props: BottomSheetBackdropProps) => (
+  useEffect(() => {
+    if (isOpen && content) {
+      requestAnimationFrame(() => {
+        bottomSheetRef.current?.snapToIndex(0);
+      });
+    } else {
+      bottomSheetRef.current?.close();
+    }
+  }, [isOpen, content]);
+
+  const handleSheetChanges = useCallback(
+    (index: number) => {
+      if (index === -1) {
+        close();
+      }
+    },
+    [close]
+  );
+
+  const renderBackdrop = useCallback((props: BottomSheetBackdropProps) => {
+    return (
       <BottomSheetBackdrop
         {...props}
         appearsOnIndex={0}
@@ -27,32 +47,25 @@ export function AppBottomSheet() {
         opacity={0.7}
         pressBehavior="close"
       />
-    ),
-    []
-  );
-
-  useEffect(() => {
-    if (content && isOpen) {
-      bottomSheetRef.current?.snapToIndex(0);
-    } else {
-      bottomSheetRef.current?.close();
-    }
-  }, [content, isOpen]);
+    );
+  }, []);
 
   return (
     <BottomSheet
-      index={-1}
-      animateOnMount
-      snapPoints={snapPoints}
-      enablePanDownToClose={Boolean(config.enablePanDownToClose)}
-      backdropComponent={renderBackdrop}
+      ref={bottomSheetRef}
       backgroundStyle={{
         backgroundColor: colors.background,
         borderTopLeftRadius: 32,
         borderTopRightRadius: 32,
       }}
+      backdropComponent={renderBackdrop}
+      enablePanDownToClose={config?.enablePanDownToClose ?? true}
+      index={-1}
+      animateOnMount
+      snapPoints={snapPoints}
+      onChange={handleSheetChanges}
     >
       <BottomSheetScrollView>{content}</BottomSheetScrollView>
     </BottomSheet>
   );
-}
+};
