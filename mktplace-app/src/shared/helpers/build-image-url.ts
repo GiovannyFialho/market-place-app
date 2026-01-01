@@ -7,7 +7,5 @@ export function buildImageURL(originalURL: string) {
     return originalURL;
   }
 
-  const updatedURL = originalURL.replace(/^http:\/\/localhost:3001/, baseURL);
-
-  return updatedURL;
+  return originalURL.replace(/^http:\/\/[^/]+:3001/, baseURL);
 }

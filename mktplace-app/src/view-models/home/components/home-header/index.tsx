@@ -1,7 +1,9 @@
 import { Ionicons } from "@expo/vector-icons";
 import { Image, Text, TouchableOpacity, View } from "react-native";
 
+import { buildImageURL } from "../../../../shared/helpers/build-image-url";
 import { useUserStore } from "../../../../shared/store/user-store";
+
 import { colors } from "../../../../styles/colors";
 
 export function HomeHeader() {
@@ -13,7 +15,7 @@ export function HomeHeader() {
         <View className="relative">
           {user?.avatarUrl ? (
             <Image
-              source={{ uri: user?.avatarUrl }}
+              source={{ uri: buildImageURL(user?.avatarUrl) }}
               className="w-[56px] h-[56px] rounded-[12px] border-shape"
             />
           ) : (
