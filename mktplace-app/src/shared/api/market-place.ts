@@ -2,7 +2,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios, { type AxiosInstance } from "axios";
 import { useUserStore } from "../store/user-store";
 
-export const baseURL = "http://192.168.68.105:3001";
+export const baseURL = "http://192.168.68.101:3001";
 
 export class MarketPlaceAPIClient {
   private instance: AxiosInstance;

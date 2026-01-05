@@ -3,6 +3,7 @@ import { Text, TouchableOpacity, View } from "react-native";
 
 import { AppInput } from "../../../../shared/components/app-input";
 import { useBottomSheetStore } from "../../../../shared/store/bottom-sheet-store";
+import { Filter } from "../filter";
 
 import { colors } from "../../../../styles/colors";
 
@@ -25,11 +26,7 @@ export function SearchInput() {
           className="ml-5 mt-6 items-center justify-center rounded-lg border size-[48px] border-purple-base"
           onPress={() =>
             open({
-              content: (
-                <View className="h-72 mb-11">
-                  <Text>Hello</Text>
-                </View>
-              ),
+              content: <Filter />,
             })
           }
         >
