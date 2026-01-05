@@ -1,3 +1,12 @@
+import { useGetProductCategoriesQuery } from "../../../../shared/queries/product/use-get-product-categories";
+
 export function useFilterModel() {
-  return {};
+  const {
+    data: productCategories,
+    isLoading,
+    error,
+    refetch,
+  } = useGetProductCategoriesQuery();
+
+  return { productCategories, isLoading, error, refetch };
 }

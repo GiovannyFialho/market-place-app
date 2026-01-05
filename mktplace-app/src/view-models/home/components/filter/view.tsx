@@ -8,7 +8,12 @@ import { useFilterModel } from "./model";
 
 import { colors } from "../../../../styles/colors";
 
-export function FilterView({}: ReturnType<typeof useFilterModel>) {
+export function FilterView({
+  productCategories,
+  isLoading,
+  error,
+  refetch,
+}: ReturnType<typeof useFilterModel>) {
   return (
     <View>
       <View className="flex-row items-center justify-between py-4 px-6">
