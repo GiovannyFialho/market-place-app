@@ -12,8 +12,10 @@ import { colors } from "../../../../styles/colors";
 export function FilterView({
   productCategories,
   isLoading,
-  error,
-  refetch,
+  selectedCategories,
+  handleValueMaxChange,
+  handleValueMinChange,
+  handleCategoryToggle,
 }: ReturnType<typeof useFilterModel>) {
   return (
     <View>
@@ -36,6 +38,7 @@ export function FilterView({
               placeholder="De"
               keyboardType="numeric"
               containerClassName="w-[90%]"
+              onChangeText={(text) => handleValueMinChange(Number(text))}
             />
           </View>
 
@@ -44,6 +47,7 @@ export function FilterView({
               placeholder="Até"
               keyboardType="numeric"
               containerClassName="w-[90%]"
+              onChangeText={(text) => handleValueMaxChange(Number(text))}
             />
           </View>
         </View>
@@ -56,13 +60,17 @@ export function FilterView({
           <View className="mb-6 gap-3">
             {productCategories?.map(({ name, id }) => (
               <TouchableOpacity
-                className="flex-row items-center py-2"
                 key={`product-category-${id}`}
+                className="flex-row items-center py-2"
+                onPress={() => handleCategoryToggle(id)}
               >
                 <Checkbox
-                  color={colors["purple-base"]}
+                  value={selectedCategories.includes(id)}
                   className="mr-3 rounded-full"
+                  color={colors["purple-base"]}
+                  onValueChange={() => handleCategoryToggle(id)}
                 />
+
                 <Text className="text-base text-gray-400">{name}</Text>
               </TouchableOpacity>
             ))}
