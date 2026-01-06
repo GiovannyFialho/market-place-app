@@ -1,4 +1,5 @@
 import { useGetProductCategoriesQuery } from "../../../../shared/queries/product/use-get-product-categories";
+import { useBottomSheetStore } from "../../../../shared/store/bottom-sheet-store";
 import { useFilterStore } from "../../../../shared/store/use-filter-store";
 
 export function useFilterModel() {
@@ -9,7 +10,9 @@ export function useFilterModel() {
     refetch,
   } = useGetProductCategoriesQuery();
 
-  const { updateFilter, filterState } = useFilterStore();
+  const { updateFilter, filterState, applyFilters, resetFilter } =
+    useFilterStore();
+  const { close } = useBottomSheetStore();
 
   function handleValueMaxChange(value: number) {
     updateFilter({ key: "valueMax", value });
@@ -36,6 +39,16 @@ export function useFilterModel() {
     }
   }
 
+  function handleApplyFilters() {
+    applyFilters();
+    close();
+  }
+
+  function handleResetFilter() {
+    resetFilter();
+    close();
+  }
+
   return {
     productCategories,
     isLoading,
@@ -43,5 +56,7 @@ export function useFilterModel() {
     handleValueMaxChange,
     handleValueMinChange,
     handleCategoryToggle,
+    handleApplyFilters,
+    handleResetFilter,
   };
 }

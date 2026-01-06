@@ -16,6 +16,8 @@ export function FilterView({
   handleValueMaxChange,
   handleValueMinChange,
   handleCategoryToggle,
+  handleApplyFilters,
+  handleResetFilter,
 }: ReturnType<typeof useFilterModel>) {
   return (
     <View>
@@ -79,11 +81,13 @@ export function FilterView({
 
         <View className="flex-row gap-3 mt-4 mb-6">
           <View className="flex-1">
-            <AppButton variant="outlined">Limpar filtro</AppButton>
+            <AppButton variant="outlined" onPress={handleResetFilter}>
+              Limpar filtro
+            </AppButton>
           </View>
 
           <View className="flex-1">
-            <AppButton>Filtrar</AppButton>
+            <AppButton onPress={handleApplyFilters}>Filtrar</AppButton>
           </View>
         </View>
       </View>

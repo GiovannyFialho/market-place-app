@@ -2,8 +2,15 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 
 import { buildImageURL } from "../../helpers/build-image-url";
 import { getProducts } from "../../services/product.service";
+import { FilterState } from "../../store/use-filter-store";
 
-export const useProductInfiniteQuery = () => {
+interface ProductsInfinityQueryParams {
+  filters?: FilterState;
+}
+
+export const useProductInfiniteQuery = ({
+  filters,
+}: ProductsInfinityQueryParams) => {
   const {
     data,
     error,
@@ -21,6 +28,12 @@ export const useProductInfiniteQuery = () => {
             page: pageParam,
             perPage: 10,
           },
+          filters: {
+            categoryIds: filters?.selectedCategories ?? [],
+            maxValue: filters?.valueMax ?? undefined,
+            minValue: filters?.valueMin ?? undefined,
+            searchText: filters?.searchText ?? undefined,
+          },
         });
 
         return response;
@@ -34,7 +47,7 @@ export const useProductInfiniteQuery = () => {
         : undefined;
     },
     initialPageParam: 1,
-    queryKey: ["products"],
+    queryKey: ["products", filters],
     staleTime: 1000 * 60 * 1, // 1min
   });
 
