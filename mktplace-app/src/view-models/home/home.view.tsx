@@ -4,9 +4,8 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { useHomeViewModel } from "./home.model";
 
 import { Footer } from "./components/footer";
-import { HomeHeader } from "./components/home-header";
 import { ProductCard } from "./components/product-card";
-import { SearchInput } from "./components/search-input";
+import { RenderHeader } from "./components/render-header";
 
 import { colors } from "../../styles/colors";
 
@@ -16,6 +15,8 @@ export function Home({
   hasNextPage,
   isFetchingNextPage,
   isRefetching,
+  searchInputText,
+  setSearchInputText,
   handleEndReached,
   handleRefresh,
 }: ReturnType<typeof useHomeViewModel>) {
@@ -40,10 +41,10 @@ export function Home({
           />
         }
         ListHeaderComponent={
-          <>
-            <HomeHeader />
-            <SearchInput />
-          </>
+          <RenderHeader
+            searchInputText={searchInputText}
+            setSearchInputText={setSearchInputText}
+          />
         }
         ListFooterComponent={
           <Footer

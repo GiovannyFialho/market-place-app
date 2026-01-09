@@ -7,7 +7,15 @@ import { Filter } from "../filter";
 
 import { colors } from "../../../../styles/colors";
 
-export function SearchInput() {
+interface SearchInputParams {
+  inputValue: string;
+  setSearchInputText: (text: string) => void;
+}
+
+export function SearchInput({
+  inputValue,
+  setSearchInputText,
+}: SearchInputParams) {
   const { open } = useBottomSheetStore();
 
   return (
@@ -17,9 +25,11 @@ export function SearchInput() {
         <View className="flex-1">
           <AppInput
             placeholder="Pesquisar"
+            value={inputValue}
             leftIcon="search"
             returnKeyType="search"
             className="text-lg flex-1"
+            onChangeText={setSearchInputText}
           />
         </View>
 
