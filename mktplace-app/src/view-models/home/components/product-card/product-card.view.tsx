@@ -1,4 +1,5 @@
 import { Ionicons } from "@expo/vector-icons";
+import { router } from "expo-router";
 import { Image, Text, TouchableOpacity, View } from "react-native";
 
 import { AppPriceText } from "../../../../shared/components/app-price-text";
@@ -13,7 +14,10 @@ export function ProductCardView({
   formatRating,
 }: ReturnType<typeof useProductCardViewModel>) {
   return (
-    <TouchableOpacity className="w-[48%] my-1 rounded-xl shadow-sm overflow-hidden h-[157px] p-[4px] bg-white mb-2">
+    <TouchableOpacity
+      className="w-[48%] my-1 rounded-xl shadow-sm overflow-hidden h-[157px] p-[4px] bg-white mb-2"
+      onPress={() => router.push(`/product/${product.id}`)}
+    >
       <View>
         <Image
           source={{ uri: product.photo }}
