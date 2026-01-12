@@ -18,7 +18,7 @@ export function ProductView({
   }
 
   return (
-    <SafeAreaView>
+    <SafeAreaView className="flex-1 bg-background">
       <FlatList
         data={[]}
         renderItem={() => <></>}
