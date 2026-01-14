@@ -8,6 +8,12 @@ import { useProductModel } from "./userProduct.model";
 export function ProductView({
   productDetail,
   error,
+  comments,
+  errorComments,
+  isLoadingComments,
+  handleLoadMore,
+  handleRefetch,
+  handleEndReached,
 }: ReturnType<typeof useProductModel>) {
   if (error) {
     return <Text>Houve um erro ao carregar os detalhes do produto</Text>;
@@ -20,7 +26,7 @@ export function ProductView({
   return (
     <SafeAreaView className="flex-1 bg-background">
       <FlatList
-        data={[]}
+        data={comments}
         renderItem={() => <></>}
         ListHeaderComponent={() => <Header productDetails={productDetail} />}
         className="px-6"

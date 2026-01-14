@@ -27,7 +27,7 @@ export function useGetProductCommentsInfiniteQuery(productId: number) {
         ...comment,
         user: {
           ...comment.user,
-          avatar: buildImageURL(comment.user.avatar.url),
+          avatar: buildImageURL(comment.user.avatar?.url ?? ""),
         },
       })) ?? [];
 
