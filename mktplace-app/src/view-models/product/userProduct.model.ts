@@ -42,6 +42,8 @@ export function useProductModel(prodcutId: number) {
     comments,
     errorComments,
     isLoadingComments,
+    isRefetching,
+    isFetchingNextPage,
     handleLoadMore,
     handleRefetch,
     handleEndReached,
