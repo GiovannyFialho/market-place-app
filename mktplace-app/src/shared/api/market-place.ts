@@ -2,7 +2,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios, { type AxiosInstance } from "axios";
 import { useUserStore } from "../store/user-store";
 
-export const baseURL = "http://192.168.68.106:3001";
+export const baseURL = "http://192.168.68.100:3001";
 
 export class MarketPlaceAPIClient {
   private instance: AxiosInstance;
@@ -39,7 +39,7 @@ export class MarketPlaceAPIClient {
       },
       (error) => {
         return Promise.reject(error);
-      }
+      },
     );
 
     this.instance.interceptors.response.use(
@@ -73,7 +73,7 @@ export class MarketPlaceAPIClient {
               "/auth/refresh",
               {
                 refreshToken,
-              }
+              },
             );
 
             const currentUserData = JSON.parse(userData);
@@ -83,7 +83,7 @@ export class MarketPlaceAPIClient {
 
             await AsyncStorage.setItem(
               "marketplace-auth",
-              JSON.stringify(currentUserData)
+              JSON.stringify(currentUserData),
             );
 
             originalRequest.headers.Authorization = `Bearer ${response.token}`;
@@ -93,7 +93,7 @@ export class MarketPlaceAPIClient {
             this.handleUnauthorized();
 
             return Promise.reject(
-              new Error("Sessão expirada, faça o login novamente")
+              new Error("Sessão expirada, faça o login novamente"),
             );
           } finally {
             this.isRefreshing = false;
@@ -105,7 +105,7 @@ export class MarketPlaceAPIClient {
         } else {
           return Promise.reject(new Error("Falha na requisição"));
         }
-      }
+      },
     );
   }
 

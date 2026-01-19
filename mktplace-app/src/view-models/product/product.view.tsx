@@ -1,8 +1,9 @@
-import { FlatList, Text } from "react-native";
+import { FlatList } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { CommentItem } from "./components/comment-item";
 import { EmptyList } from "./components/empty-list";
+import { Error } from "./components/error";
 import { Header } from "./components/header";
 import { ListFooter } from "./components/list-footer";
 import { Loading } from "./components/loading";
@@ -23,14 +24,10 @@ export function ProductView({
   handleEndReached,
 }: ReturnType<typeof useProductModel>) {
   if (error) {
-    return <Text>Houve um erro ao carregar os detalhes do produto</Text>;
+    return <Error />;
   }
 
-  if (!productDetail) {
-    return null;
-  }
-
-  if (isLoading) {
+  if (isLoading || !productDetail) {
     return <Loading />;
   }
 
