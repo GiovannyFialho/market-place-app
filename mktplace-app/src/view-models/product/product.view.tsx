@@ -8,6 +8,7 @@ import { Header } from "./components/header";
 import { ListFooter } from "./components/list-footer";
 import { Loading } from "./components/loading";
 
+import { AddToCardFooter } from "./components/add-to-card-footer";
 import { useProductModel } from "./userProduct.model";
 
 export function ProductView({
@@ -32,13 +33,14 @@ export function ProductView({
   }
 
   return (
-    <SafeAreaView className="flex-1 bg-background">
+    <SafeAreaView edges={["top"]} className="flex-1 bg-background">
       <FlatList
         data={comments}
         className="px-6"
         onEndReached={handleEndReached}
         onRefresh={handleRefetch}
         refreshing={isRefetching}
+        contentContainerClassName="pb-6"
         renderItem={({ item }) => <CommentItem comment={item} />}
         ListHeaderComponent={() => <Header productDetails={productDetail} />}
         ListFooterComponent={() => (
@@ -48,6 +50,8 @@ export function ProductView({
           <EmptyList isLoadingComments={isLoadingComments} />
         )}
       />
+
+      <AddToCardFooter product={productDetail} />
     </SafeAreaView>
   );
 }
