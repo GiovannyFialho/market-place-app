@@ -2,18 +2,19 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 
-interface CartProduct {
-  id: number;
-  name: string;
-  price: string;
-  quantity: number;
-  image?: string;
-}
+import {
+  CartProduct,
+  OmitedProductCard,
+} from "@/shared/domain/cart/cart.types";
+import {
+  addProductToCart,
+  calculateTotal,
+} from "@/shared/domain/cart/cart.utils";
 
 interface CartStore {
-  product: CartProduct[];
+  products: CartProduct[];
   total: number;
-  addProduct: (product: Omit<CartProduct, "quantity">) => void;
+  addProduct: (product: OmitedProductCard) => void;
   removeProduct: (productId: number) => void;
   updateQuantity: (params: { productId: number; quantity: number }) => void;
   clearCart: () => void;
@@ -23,12 +24,21 @@ interface CartStore {
 export const useCartStore = create<CartStore>()(
   persist(
     (set) => ({
-      product: [],
+      products: [],
       total: 0,
-      addProduct: () => set({}),
+      addProduct: (product) =>
+        set((state) => {
+          const newProductsList = addProductToCart(state.products, product);
+          const total = calculateTotal(newProductsList);
+
+          return {
+            products: newProductsList,
+            total,
+          };
+        }),
       removeProduct: () => set({}),
       updateQuantity: () => set({}),
-      clearCart: () => set({ product: [], total: 0 }),
+      clearCart: () => set({ products: [], total: 0 }),
       getProductCount: () => 0,
     }),
     {
