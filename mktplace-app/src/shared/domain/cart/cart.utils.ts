@@ -7,6 +7,12 @@ export function findExistingProduct(
   return productsList.some((product) => product.id === productId);
 }
 
+export function calculateTotal(productsList: CartProduct[]) {
+  return productsList.reduce((acc, product) => {
+    return acc + Number(product.price) * product.quantity;
+  }, 0);
+}
+
 export function addProductToCart(
   productsList: CartProduct[],
   newProduct: OmitedProductCard,
@@ -14,20 +20,31 @@ export function addProductToCart(
   const existingProduct = findExistingProduct(productsList, newProduct.id);
 
   if (existingProduct) {
-    return productsList.map((product) => {
+    const products = productsList.map((product) => {
       if (product.id === newProduct.id) {
         return { ...product, quantity: product.quantity + 1 };
       }
 
       return product;
     });
+
+    const total = calculateTotal(products);
+
+    return { products, total };
   }
 
-  return [...productsList, { ...newProduct, quantity: 1 }];
+  const products = [...productsList, { ...newProduct, quantity: 1 }];
+  const total = calculateTotal(products);
+
+  return { products, total };
 }
 
-export function calculateTotal(productsList: CartProduct[]) {
-  return productsList.reduce((acc, product) => {
-    return acc + Number(product.price) * product.quantity;
-  }, 0);
+export function removeProductFromList(
+  productsList: CartProduct[],
+  productId: number,
+) {
+  const products = productsList.filter((product) => product.id !== productId);
+  const total = calculateTotal(products);
+
+  return { products, total };
 }

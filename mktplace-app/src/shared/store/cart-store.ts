@@ -8,7 +8,7 @@ import {
 } from "@/shared/domain/cart/cart.types";
 import {
   addProductToCart,
-  calculateTotal,
+  removeProductFromList,
 } from "@/shared/domain/cart/cart.utils";
 
 interface CartStore {
@@ -27,16 +27,9 @@ export const useCartStore = create<CartStore>()(
       products: [],
       total: 0,
       addProduct: (product) =>
-        set((state) => {
-          const newProductsList = addProductToCart(state.products, product);
-          const total = calculateTotal(newProductsList);
-
-          return {
-            products: newProductsList,
-            total,
-          };
-        }),
-      removeProduct: () => set({}),
+        set((state) => addProductToCart(state.products, product)),
+      removeProduct: (productId) =>
+        set((state) => removeProductFromList(state.products, productId)),
       updateQuantity: () => set({}),
       clearCart: () => set({ products: [], total: 0 }),
       getProductCount: () => 0,
