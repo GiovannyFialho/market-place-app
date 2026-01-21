@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { Toast } from "toastify-react-native";
 
-import { uploadAvatar } from "../../services/auth.service";
+import { uploadAvatar } from "@/shared/services/auth.service";
 
 export function useUploadAvatarMutation() {
   const mutation = useMutation({

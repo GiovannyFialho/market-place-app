@@ -8,10 +8,15 @@ import {
   View,
 } from "react-native";
 
-import { type AppInputType, INPUT_TYPE_CONFIG } from "./input.types";
-import { appInputVariants, type appInputVariantsProps } from "./input.variants";
-
-import { useAppInputViewModel } from "./useAppInputViewModel";
+import {
+  AppInputType,
+  INPUT_TYPE_CONFIG,
+} from "@/shared/components/app-input/input.types";
+import {
+  appInputVariants,
+  appInputVariantsProps,
+} from "@/shared/components/app-input/input.variants";
+import { useAppInputViewModel } from "@/shared/components/app-input/useAppInputViewModel";
 
 export type AppInputProps = {
   label?: string;

@@ -1,8 +1,9 @@
 import { useMutation } from "@tanstack/react-query";
 
-import type { SignUpHttpParams } from "../../interfaces/http/sign-up";
-import { signUp } from "../../services/auth.service";
-import { useUserStore } from "../../store/user-store";
+import { useUserStore } from "@/shared/store/user-store";
+
+import type { SignUpHttpParams } from "@/shared/interfaces/http/sign-up";
+import { signUp } from "@/shared/services/auth.service";
 
 type UserRegisterMutationParams = {
   onSuccess?: () => void;

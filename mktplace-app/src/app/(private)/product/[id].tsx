@@ -1,7 +1,7 @@
 import { useLocalSearchParams } from "expo-router";
 
-import { ProductView } from "../../../view-models/product/product.view";
-import { useProductModel } from "../../../view-models/product/userProduct.model";
+import { useProductModel } from "@/view-models/product/product.model";
+import { ProductView } from "@/view-models/product/product.view";
 
 export default function Product() {
   const { id } = useLocalSearchParams<{ id: string }>();

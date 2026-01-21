@@ -1,12 +1,12 @@
 import { Ionicons } from "@expo/vector-icons";
 import { createElement } from "react";
 
-import { useModalStore } from "../store/modal-store";
+import { useModalStore } from "@/shared/store/modal-store";
 
 import {
   SelectionModal,
   type SelectionModalProps,
-} from "../components/modals/selection-modal";
+} from "@/shared/components/modals/selection-modal";
 
 export type SelectionVariant = "primary" | "secondary" | "danger";
 export interface SelectionOption {
@@ -33,7 +33,7 @@ export const useAppModal = () => {
         title,
         message,
         options,
-      } as SelectionModalProps)
+      } as SelectionModalProps),
     );
   };
   return { showSelection };

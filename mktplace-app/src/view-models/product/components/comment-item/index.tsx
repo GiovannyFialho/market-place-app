@@ -2,9 +2,10 @@ import { Ionicons } from "@expo/vector-icons";
 import { FC } from "react";
 import { Image, Text, View } from "react-native";
 
-import { ProductComment } from "../../../../shared/interfaces/product-comment";
-import { useUserStore } from "../../../../shared/store/user-store";
-import { colors } from "../../../../styles/colors";
+import { ProductComment } from "@/shared/interfaces/product-comment";
+import { useUserStore } from "@/shared/store/user-store";
+
+import { colors } from "@/styles/colors";
 
 interface CommentItemParams {
   comment: ProductComment;

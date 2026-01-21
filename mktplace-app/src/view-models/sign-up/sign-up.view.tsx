@@ -2,12 +2,12 @@ import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
 import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
 
-import { useSignUpSchemaViewModel } from "./useSignUp.viewModel";
+import { AppButton } from "@/shared/components/app-button";
+import { AppInputController } from "@/shared/components/app-input-controller";
+import { AuthFormHeader } from "@/shared/components/auth-form-header";
+import { KeyboardContainer } from "@/shared/components/keyboard-container";
 
-import { AppButton } from "../../shared/components/app-button";
-import { AppInputController } from "../../shared/components/app-input-controller";
-import { AuthFormHeader } from "../../shared/components/auth-form-header";
-import { KeyboardContainer } from "../../shared/components/keyboard-container";
+import { useSignUpSchemaViewModel } from "@/view-models/sign-up/sign-up.model";
 
 type SignUpViewProps = ReturnType<typeof useSignUpSchemaViewModel>;
 

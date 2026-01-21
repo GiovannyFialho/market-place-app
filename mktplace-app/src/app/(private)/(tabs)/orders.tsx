@@ -1,6 +1,6 @@
 import { Text, TouchableOpacity, View } from "react-native";
 
-import { useUserStore } from "../../../shared/store/user-store";
+import { useUserStore } from "@/shared/store/user-store";
 
 export default function Orders() {
   const { logout } = useUserStore();

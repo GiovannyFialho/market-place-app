@@ -1,5 +1,5 @@
-import SignUpView from "../../view-models/sign-up/sign-up.view";
-import { useSignUpSchemaViewModel } from "../../view-models/sign-up/useSignUp.viewModel";
+import { useSignUpSchemaViewModel } from "@/view-models/sign-up/sign-up.model";
+import SignUpView from "@/view-models/sign-up/sign-up.view";
 
 export default function SignUp() {
   const props = useSignUpSchemaViewModel();

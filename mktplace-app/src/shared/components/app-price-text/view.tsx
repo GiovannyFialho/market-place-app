@@ -1,6 +1,6 @@
 import { Text, View } from "react-native";
 
-import { useAppPriceTextViewModel } from "./model";
+import { useAppPriceTextViewModel } from "@/shared/components/app-price-text/model";
 
 type AppPriceTextViewProps = ReturnType<typeof useAppPriceTextViewModel> & {
   classNameCurrency?: string;

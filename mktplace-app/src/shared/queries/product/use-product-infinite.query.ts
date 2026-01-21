@@ -1,8 +1,9 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 
-import { buildImageURL } from "../../helpers/build-image-url";
-import { getProducts } from "../../services/product.service";
-import { FilterState } from "../../store/use-filter-store";
+import { FilterState } from "@/shared/store/use-filter-store";
+
+import { buildImageURL } from "@/shared/helpers/build-image-url";
+import { getProducts } from "@/shared/services/product.service";
 
 interface ProductsInfinityQueryParams {
   filters?: FilterState;

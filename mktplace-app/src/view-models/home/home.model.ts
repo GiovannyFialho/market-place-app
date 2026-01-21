@@ -1,8 +1,8 @@
 import { useState } from "react";
 
-import { useDebounce } from "../../shared/hooks/useDebounce";
-import { useProductInfiniteQuery } from "../../shared/queries/product/use-product-infinite.query";
-import { useFilterStore } from "../../shared/store/use-filter-store";
+import { useDebounce } from "@/shared/hooks/useDebounce";
+import { useProductInfiniteQuery } from "@/shared/queries/product/use-product-infinite.query";
+import { useFilterStore } from "@/shared/store/use-filter-store";
 
 export function useHomeViewModel() {
   const [searchInputText, setSearchInputText] = useState("");

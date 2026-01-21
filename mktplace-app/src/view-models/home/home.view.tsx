@@ -1,13 +1,13 @@
 import { FlatList, RefreshControl } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import { useHomeViewModel } from "./home.model";
+import { useHomeViewModel } from "@/view-models/home/home.model";
 
-import { Footer } from "./components/footer";
-import { ProductCard } from "./components/product-card";
-import { RenderHeader } from "./components/render-header";
+import { ProductCard } from "@/view-models/home//components/product-card";
+import { RenderHeader } from "@/view-models/home//components/render-header";
+import { Footer } from "@/view-models/home/components/footer";
 
-import { colors } from "../../styles/colors";
+import { colors } from "@/styles/colors";
 
 export function Home({
   products,

@@ -1,7 +1,7 @@
 import { memo } from "react";
 
-import { HomeHeader } from "../home-header";
-import { SearchInput } from "../search-input";
+import { HomeHeader } from "@/view-models/home/components/home-header";
+import { SearchInput } from "@/view-models/home/components/search-input";
 
 export const RenderHeader = memo(
   ({
@@ -18,5 +18,5 @@ export const RenderHeader = memo(
         setSearchInputText={setSearchInputText}
       />
     </>
-  )
+  ),
 );

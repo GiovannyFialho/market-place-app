@@ -1,7 +1,7 @@
-import { ProductInterface } from "../../../../shared/interfaces/product";
+import type { ProductInterface } from "@/shared/interfaces/product";
 
-import { ProductCardView } from "./product-card.view";
-import { useProductCardViewModel } from "./useProductCard.model";
+import { useProductCardViewModel } from "@/view-models/home/components/product-card/product-card.model";
+import { ProductCardView } from "@/view-models/home/components/product-card/product-card.view";
 
 interface ProductCardProps {
   product: ProductInterface;

@@ -1,4 +1,4 @@
-import { ProductInterface } from "../product";
+import type { ProductInterface } from "@/shared/interfaces/product";
 
 export interface ProductResponse {
   page: number;

@@ -1,5 +1,5 @@
-import { useAppPriceTextViewModel } from "./model";
-import { AppPriceTextView } from "./view";
+import { useAppPriceTextViewModel } from "@/shared/components/app-price-text/model";
+import { AppPriceTextView } from "@/shared/components/app-price-text/view";
 
 interface AppPriceTextParams {
   classNameCurrency?: string;

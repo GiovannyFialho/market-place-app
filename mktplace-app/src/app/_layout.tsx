@@ -3,9 +3,9 @@ import { Stack } from "expo-router";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import ToastManager from "toastify-react-native";
 
-import { AppModal } from "../shared/components/app-modal";
+import { AppModal } from "@/shared/components/app-modal";
 
-import "../styles/global.css";
+import "@/styles/global.css";
 
 const queryClient = new QueryClient();
 

@@ -1,8 +1,8 @@
 import { View } from "react-native";
 
-import { AppButton } from "../../../../shared/components/app-button";
-import { AppPriceText } from "../../../../shared/components/app-price-text";
-import type { ProductInterface } from "../../../../shared/interfaces/product";
+import { AppButton } from "@/shared/components/app-button";
+import { AppPriceText } from "@/shared/components/app-price-text";
+import type { ProductInterface } from "@/shared/interfaces/product";
 
 interface AddToCardFooterProps {
   product: ProductInterface;

@@ -5,9 +5,9 @@ import BottomSheet, {
 } from "@gorhom/bottom-sheet";
 import { useCallback, useEffect, useMemo, useRef } from "react";
 
-import { useBottomSheetStore } from "../../store/bottom-sheet-store";
+import { useBottomSheetStore } from "@/shared/store/bottom-sheet-store";
 
-import { colors } from "../../../styles/colors";
+import { colors } from "@/styles/colors";
 
 export const AppBottomSheet = () => {
   const { content, close, isOpen, config } = useBottomSheetStore();
@@ -16,7 +16,7 @@ export const AppBottomSheet = () => {
 
   const snapPoints = useMemo(
     () => config?.snapPoints || ["80%", "90%"],
-    [config?.snapPoints]
+    [config?.snapPoints],
   );
 
   useEffect(() => {
@@ -35,7 +35,7 @@ export const AppBottomSheet = () => {
         close();
       }
     },
-    [close]
+    [close],
   );
 
   const renderBackdrop = useCallback((props: BottomSheetBackdropProps) => {

@@ -3,11 +3,11 @@ import { router } from "expo-router";
 import { FC } from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native";
 
-import { AppPriceText } from "../../../../shared/components/app-price-text";
-import { buildImageURL } from "../../../../shared/helpers/build-image-url";
-import { GetProductDetailsInterface } from "../../../../shared/interfaces/http/product-detail";
+import { AppPriceText } from "@/shared/components/app-price-text";
+import { buildImageURL } from "@/shared/helpers/build-image-url";
+import { GetProductDetailsInterface } from "@/shared/interfaces/http/product-detail";
 
-import { colors } from "../../../../styles/colors";
+import { colors } from "@/styles/colors";
 
 interface HeaderParams {
   productDetails: GetProductDetailsInterface;

@@ -1,9 +1,12 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 
-import { useSignInMutation } from "../../shared/queries/auth/use-sign-in.mutation";
+import { useSignInMutation } from "@/shared/queries/auth/use-sign-in.mutation";
 
-import { signInSchema, type SignInSchema } from "./sign-in.scheme";
+import {
+  signInSchema,
+  SignInSchema,
+} from "@/view-models/sign-in/sign-in.scheme";
 
 export function useSignInSchemaViewModel() {
   const {

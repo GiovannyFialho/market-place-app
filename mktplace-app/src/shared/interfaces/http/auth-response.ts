@@ -1,4 +1,4 @@
-import { UserInterface } from "../user";
+import type { UserInterface } from "@/shared/interfaces/user";
 
 export interface AuthResponse {
   user: UserInterface;

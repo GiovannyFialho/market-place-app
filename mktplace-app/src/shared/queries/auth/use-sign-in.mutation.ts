@@ -1,9 +1,9 @@
 import { useMutation } from "@tanstack/react-query";
 
-import { useUserStore } from "../../store/user-store";
+import { useUserStore } from "@/shared/store/user-store";
 
-import type { SignInHttpParams } from "../../interfaces/http/sign-in";
-import { signIn } from "../../services/auth.service";
+import type { SignInHttpParams } from "@/shared/interfaces/http/sign-in";
+import { signIn } from "@/shared/services/auth.service";
 
 export function useSignInMutation() {
   const { setSession } = useUserStore();

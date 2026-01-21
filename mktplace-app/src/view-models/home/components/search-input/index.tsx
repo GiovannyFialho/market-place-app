@@ -1,11 +1,12 @@
 import { Ionicons } from "@expo/vector-icons";
 import { Text, TouchableOpacity, View } from "react-native";
 
-import { AppInput } from "../../../../shared/components/app-input";
-import { useBottomSheetStore } from "../../../../shared/store/bottom-sheet-store";
-import { Filter } from "../filter";
+import { AppInput } from "@/shared/components/app-input";
+import { useBottomSheetStore } from "@/shared/store/bottom-sheet-store";
 
-import { colors } from "../../../../styles/colors";
+import { Filter } from "@/view-models/home/components/filter";
+
+import { colors } from "@/styles/colors";
 
 interface SearchInputParams {
   inputValue: string;

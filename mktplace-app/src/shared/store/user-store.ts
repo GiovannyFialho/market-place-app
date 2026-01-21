@@ -2,7 +2,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 
-import { UserInterface } from "../interfaces/user";
+import { UserInterface } from "@/shared/interfaces/user";
 
 interface SetSessionParams {
   user: UserInterface;
@@ -48,6 +48,6 @@ export const useUserStore = create<UserStore>()(
     {
       name: "marketplace-auth",
       storage: createJSONStorage(() => AsyncStorage),
-    }
-  )
+    },
+  ),
 );

@@ -1,6 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios, { type AxiosInstance } from "axios";
-import { useUserStore } from "../store/user-store";
+
+import { useUserStore } from "@/shared/store/user-store";
 
 export const baseURL = "http://192.168.68.100:3001";
 

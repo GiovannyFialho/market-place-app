@@ -2,11 +2,11 @@ import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
 import { Image, Text, TouchableOpacity, View } from "react-native";
 
-import { AppPriceText } from "../../../../shared/components/app-price-text";
+import { AppPriceText } from "@/shared/components/app-price-text";
 
-import { useProductCardViewModel } from "./useProductCard.model";
+import { useProductCardViewModel } from "@/view-models/home/components/product-card/product-card.model";
 
-import { colors } from "../../../../styles/colors";
+import { colors } from "@/styles/colors";
 
 export function ProductCardView({
   product,

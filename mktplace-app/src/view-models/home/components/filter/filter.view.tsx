@@ -2,12 +2,12 @@ import { Ionicons } from "@expo/vector-icons";
 import { Checkbox } from "expo-checkbox";
 import { Text, TouchableOpacity, View } from "react-native";
 
-import { AppButton } from "../../../../shared/components/app-button";
-import { AppInput } from "../../../../shared/components/app-input";
+import { AppButton } from "@/shared/components/app-button";
+import { AppInput } from "@/shared/components/app-input";
 
-import { useFilterModel } from "./model";
+import { useFilterModel } from "@/view-models/home/components/filter/filter.model";
 
-import { colors } from "../../../../styles/colors";
+import { colors } from "@/styles/colors";
 
 export function FilterView({
   productCategories,

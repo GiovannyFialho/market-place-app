@@ -1,10 +1,10 @@
 import { Ionicons } from "@expo/vector-icons";
 import { Image, Text, TouchableOpacity, View } from "react-native";
 
-import { buildImageURL } from "../../../../shared/helpers/build-image-url";
-import { useUserStore } from "../../../../shared/store/user-store";
+import { buildImageURL } from "@/shared/helpers/build-image-url";
+import { useUserStore } from "@/shared/store/user-store";
 
-import { colors } from "../../../../styles/colors";
+import { colors } from "@/styles/colors";
 
 export function HomeHeader() {
   const { user } = useUserStore();

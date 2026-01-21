@@ -5,9 +5,9 @@ import { Text, TouchableOpacity, View } from "react-native";
 import type {
   SelectionOption,
   SelectionVariant,
-} from "../../../hooks/useAppModal";
+} from "@/shared/hooks/useAppModal";
 
-import { colors } from "../../../../styles/colors";
+import { colors } from "@/styles/colors";
 
 export interface SelectionModalProps {
   title: string;
@@ -27,7 +27,7 @@ export const SelectionModal = ({
         "bg-danger": variant === "danger",
         "bg-blue-dark": variant === "secondary",
         "bg-purple-base": variant === "primary",
-      }
+      },
     );
 
   return (

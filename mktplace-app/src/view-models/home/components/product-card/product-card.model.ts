@@ -1,4 +1,4 @@
-import { ProductInterface } from "../../../../shared/interfaces/product";
+import { ProductInterface } from "@/shared/interfaces/product";
 
 interface UseProductCardViewModelParams {
   product: ProductInterface;

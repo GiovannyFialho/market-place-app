@@ -1,6 +1,6 @@
 import { Modal, TouchableWithoutFeedback, View } from "react-native";
 
-import { useModalStore } from "../../store/modal-store";
+import { useModalStore } from "@/shared/store/modal-store";
 
 export function AppModal() {
   const { isOpen, content, config, close } = useModalStore();

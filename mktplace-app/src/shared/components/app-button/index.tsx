@@ -7,9 +7,12 @@ import {
   type TouchableOpacityProps,
 } from "react-native";
 
-import { buttonVariants, type ButtonVariantsProps } from "./button.variants";
+import {
+  buttonVariants,
+  ButtonVariantsProps,
+} from "@/shared/components/app-button/button.variants";
 
-import { colors } from "../../../styles/colors";
+import { colors } from "@/styles/colors";
 
 type AppButtonProps = {
   children: ReactNode;

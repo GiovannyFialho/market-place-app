@@ -1,15 +1,19 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CameraType } from "expo-image-picker";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 
-import { useSignUpMutation } from "../../shared/queries/auth/use-sign-up.mutation";
-import { useUserStore } from "../../shared/store/user-store";
+import { useSignUpMutation } from "@/shared/queries/auth/use-sign-up.mutation";
+import { useUserStore } from "@/shared/store/user-store";
 
-import { useImage } from "../../shared/hooks/useImage";
+import { useImage } from "@/shared/hooks/useImage";
 
-import { useState } from "react";
-import { useUploadAvatarMutation } from "../../shared/queries/auth/use-upload-avatar.mutation";
-import { signUpSchema, type SignUpSchema } from "./sign-up.scheme";
+import { useUploadAvatarMutation } from "@/shared/queries/auth/use-upload-avatar.mutation";
+
+import {
+  signUpSchema,
+  SignUpSchema,
+} from "@/view-models/sign-up/sign-up.scheme";
 
 export function useSignUpSchemaViewModel() {
   const { updateUser } = useUserStore();

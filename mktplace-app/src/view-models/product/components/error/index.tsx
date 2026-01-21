@@ -2,9 +2,9 @@ import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
 import { Text, View } from "react-native";
 
-import { AppButton } from "../../../../shared/components/app-button";
+import { AppButton } from "@/shared/components/app-button";
 
-import { colors } from "../../../../styles/colors";
+import { colors } from "@/styles/colors";
 
 export function Error() {
   return (

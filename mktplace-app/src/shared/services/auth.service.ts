@@ -1,17 +1,17 @@
-import { baseURL, marketPlaceAPIClient } from "../api/market-place";
+import { baseURL, marketPlaceAPIClient } from "@/shared/api/market-place";
 
-import type { AuthResponse } from "../interfaces/http/auth-response";
-import type { SignInHttpParams } from "../interfaces/http/sign-in";
+import type { AuthResponse } from "@/shared/interfaces/http/auth-response";
+import type { SignInHttpParams } from "@/shared/interfaces/http/sign-in";
 import type {
   SignUpHttpParams,
   SignUpHttpResponse,
-} from "../interfaces/http/sign-up";
-import { UploadAvatarResponse } from "../interfaces/http/upload-avatar";
+} from "@/shared/interfaces/http/sign-up";
+import type { UploadAvatarResponse } from "@/shared/interfaces/http/upload-avatar";
 
 export async function signUp(userData: SignUpHttpParams) {
   const { data } = await marketPlaceAPIClient.post<SignUpHttpResponse>(
     "/auth/register",
-    userData
+    userData,
   );
 
   return data;
@@ -20,7 +20,7 @@ export async function signUp(userData: SignUpHttpParams) {
 export const signIn = async (userData: SignInHttpParams) => {
   const { data } = await marketPlaceAPIClient.post<AuthResponse>(
     "/auth/login",
-    userData
+    userData,
   );
 
   return data;
@@ -37,7 +37,7 @@ export const uploadAvatar = async (avatarUri: string) => {
 
   const { data } = await marketPlaceAPIClient.post<UploadAvatarResponse>(
     "/user/avatar",
-    formData
+    formData,
   );
 
   data.url = `${baseURL}${data.url}`;

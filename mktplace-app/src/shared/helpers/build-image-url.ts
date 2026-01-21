@@ -1,6 +1,6 @@
 import Constants from "expo-constants";
 
-import { baseURL } from "../api/market-place";
+import { baseURL } from "@/shared/api/market-place";
 
 export function buildImageURL(originalURL: string) {
   if (Constants.expoConfig?.extra?.isProduction) {

@@ -6,7 +6,7 @@ import {
   Path,
 } from "react-hook-form";
 
-import { AppInput, type AppInputProps } from "../app-input";
+import { AppInput, type AppInputProps } from "@/shared/components/app-input";
 
 type AppInputControllerProps<T extends FieldValues> = Omit<
   AppInputProps,

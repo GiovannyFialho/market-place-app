@@ -1,4 +1,4 @@
-import { UserInterface } from "../user";
+import { UserInterface } from "@/shared/interfaces/user";
 
 export interface SignUpHttpParams {
   name: string;

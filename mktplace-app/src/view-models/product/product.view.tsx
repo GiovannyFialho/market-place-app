@@ -1,15 +1,15 @@
 import { FlatList } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import { CommentItem } from "./components/comment-item";
-import { EmptyList } from "./components/empty-list";
-import { Error } from "./components/error";
-import { Header } from "./components/header";
-import { ListFooter } from "./components/list-footer";
-import { Loading } from "./components/loading";
+import { AddToCardFooter } from "@/view-models/product/components/add-to-card-footer";
+import { CommentItem } from "@/view-models/product/components/comment-item";
+import { EmptyList } from "@/view-models/product/components/empty-list";
+import { Error } from "@/view-models/product/components/error";
+import { Header } from "@/view-models/product/components/header";
+import { ListFooter } from "@/view-models/product/components/list-footer";
+import { Loading } from "@/view-models/product/components/loading";
 
-import { AddToCardFooter } from "./components/add-to-card-footer";
-import { useProductModel } from "./userProduct.model";
+import { useProductModel } from "@/view-models/product/product.model";
 
 export function ProductView({
   productDetail,
