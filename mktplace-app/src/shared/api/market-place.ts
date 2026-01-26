@@ -3,7 +3,7 @@ import axios, { type AxiosInstance } from "axios";
 
 import { useUserStore } from "@/shared/store/user-store";
 
-export const baseURL = "http://192.168.68.100:3001";
+export const baseURL = "http://192.168.68.104:3001";
 
 export class MarketPlaceAPIClient {
   private instance: AxiosInstance;

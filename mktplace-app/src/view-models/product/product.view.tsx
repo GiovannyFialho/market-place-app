@@ -23,6 +23,7 @@ export function ProductView({
   handleLoadMore,
   handleRefetch,
   handleEndReached,
+  handleAddToCart,
 }: ReturnType<typeof useProductModel>) {
   if (error) {
     return <Error />;
@@ -51,7 +52,7 @@ export function ProductView({
         )}
       />
 
-      <AddToCardFooter product={productDetail} />
+      <AddToCardFooter product={productDetail} onAddToCart={handleAddToCart} />
     </SafeAreaView>
   );
 }
