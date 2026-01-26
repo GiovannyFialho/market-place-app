@@ -44,6 +44,18 @@ export function useProductModel(prodcutId: number) {
     handleLoadMore();
   }
 
+  function onGoToCart() {
+    router.push("/(private)/(tabs)/cart");
+
+    close();
+  }
+
+  function onContinueShopping() {
+    router.push("/(private)/(tabs)/home");
+
+    close();
+  }
+
   function handleAddToCart() {
     if (!productDetail) return;
 
@@ -57,12 +69,8 @@ export function useProductModel(prodcutId: number) {
     open(
       createElement(AddToCartSuccessModal, {
         productName: productDetail.name,
-        onGoToCart: () => router.push("/(private)/(tabs)/cart"),
-        onContinueShopping: () => {
-          router.push("/(private)/(tabs)/home");
-
-          close();
-        },
+        onGoToCart,
+        onContinueShopping,
         onClose: () => close(),
       }),
     );
