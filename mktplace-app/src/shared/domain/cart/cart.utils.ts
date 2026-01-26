@@ -48,3 +48,36 @@ export function removeProductFromList(
 
   return { products, total };
 }
+
+export function updateProductQuantity({
+  productId,
+  productList,
+  quantity,
+}: {
+  productId: number;
+  productList: CartProduct[];
+  quantity: number;
+}) {
+  if (quantity <= 0) {
+    return removeProductFromList(productList, productId);
+  }
+
+  const products = productList.map((product) => {
+    if (product.id === productId) {
+      return { ...product, quantity };
+    } else {
+      return product;
+    }
+  });
+
+  const total = calculateTotal(products);
+
+  return {
+    products,
+    total,
+  };
+}
+
+export function getProductCount(productList: CartProduct[]) {
+  return productList.reduce((acc, product) => acc + product.quantity, 0);
+}

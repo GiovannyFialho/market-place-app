@@ -8,7 +8,9 @@ import {
 } from "@/shared/domain/cart/cart.types";
 import {
   addProductToCart,
+  getProductCount,
   removeProductFromList,
+  updateProductQuantity,
 } from "@/shared/domain/cart/cart.utils";
 
 interface CartStore {
@@ -23,16 +25,23 @@ interface CartStore {
 
 export const useCartStore = create<CartStore>()(
   persist(
-    (set) => ({
+    (set, get) => ({
       products: [],
       total: 0,
       addProduct: (product) =>
         set((state) => addProductToCart(state.products, product)),
       removeProduct: (productId) =>
         set((state) => removeProductFromList(state.products, productId)),
-      updateQuantity: () => set({}),
+      updateQuantity: ({ productId, quantity }) =>
+        set((state) =>
+          updateProductQuantity({
+            productId,
+            productList: state.products,
+            quantity,
+          }),
+        ),
       clearCart: () => set({ products: [], total: 0 }),
-      getProductCount: () => 0,
+      getProductCount: () => getProductCount(get().products),
     }),
     {
       name: "marketplace-cart",
