@@ -9,7 +9,7 @@ export interface ProductComment {
     name: string;
     eamil: string;
     avatar: {
-      url: string;
+      url?: string;
     };
     rating: {
       value: number;
