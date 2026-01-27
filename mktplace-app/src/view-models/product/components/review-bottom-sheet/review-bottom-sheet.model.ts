@@ -1,17 +1,22 @@
 import { useEffect, useState } from "react";
+import { Toast } from "toastify-react-native";
 
+import { useCreateCommentMutation } from "@/shared/queries/comments/use-create-comment.mutation";
 import { useGetUserCommentQuery } from "@/shared/queries/comments/use-get-user-comment.query";
+import { useUpdateCommentMutation } from "@/shared/queries/comments/use-update-comment.mutation";
 
 interface RatingFormInterface {
   content: string;
   rating: number;
   isEditing: boolean;
+  commentId?: number;
 }
 
 const initialRatingForm: RatingFormInterface = {
-  rating: 0,
   content: "",
+  rating: 0,
   isEditing: false,
+  commentId: undefined,
 };
 
 export function useReviewBottomSheetViewModel(productId: number) {
@@ -20,6 +25,10 @@ export function useReviewBottomSheetViewModel(productId: number) {
 
   const { data: userComment, isLoading: isLoadingUserComment } =
     useGetUserCommentQuery(productId);
+
+  const createCommentMutation = useCreateCommentMutation(productId);
+
+  const updateCommentMutation = useUpdateCommentMutation(productId);
 
   function handleRatingChange(rating: number) {
     setRatingForm((prevData) => ({
@@ -35,17 +44,52 @@ export function useReviewBottomSheetViewModel(productId: number) {
     }));
   }
 
+  async function handleFormSubmit() {
+    if (ratingForm.rating === 0) {
+      Toast.warn("Por favor, selecione uma nota.", "top");
+    }
+
+    if (!ratingForm.content.trim()) {
+      Toast.warn("Por favor, escreva um comentário.", "top");
+    }
+
+    const { isEditing, ...formData } = ratingForm;
+
+    if (isEditing) {
+      updateCommentMutation.mutateAsync({
+        ...formData,
+        commentId: formData.commentId!,
+      });
+    } else {
+      createCommentMutation.mutateAsync({
+        ...formData,
+        productId,
+        rating: formData.rating,
+      });
+    }
+  }
+
   useEffect(() => {
-    if (userComment && userComment.rating && userComment.content) {
+    if (userComment && userComment.comment && userComment.rating) {
       setRatingForm({
         rating: userComment.rating,
-        content: userComment.content,
+        content: userComment.comment.content,
         isEditing: true,
+        commentId: userComment.comment.id,
       });
     } else {
       setRatingForm(initialRatingForm);
     }
   }, [userComment]);
 
-  return { ratingForm, handleRatingChange, handleContentChange };
+  const isLoading =
+    createCommentMutation.isPending || updateCommentMutation.isPending;
+
+  return {
+    ratingForm,
+    isLoading,
+    handleRatingChange,
+    handleContentChange,
+    handleFormSubmit,
+  };
 }
