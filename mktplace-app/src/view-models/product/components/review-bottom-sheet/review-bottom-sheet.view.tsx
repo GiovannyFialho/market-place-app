@@ -9,13 +9,17 @@ import { useReviewBottomSheetViewModel } from "@/view-models/product/components/
 
 import { colors } from "@/styles/colors";
 
-export function ReviewBottomSheetView({}: ReturnType<
-  typeof useReviewBottomSheetViewModel
->) {
+export function ReviewBottomSheetView({
+  ratingForm,
+  handleRatingChange,
+  handleContentChange,
+}: ReturnType<typeof useReviewBottomSheetViewModel>) {
   return (
     <View className="bg-background rounded-t-2xl">
       <View className="flex-row items-center justify-between p-6">
-        <Text className="text-lg font-bold text-gray-900">Avaliar produto</Text>
+        <Text className="text-lg font-bold text-gray-900">
+          {ratingForm.isEditing ? "Editar avaliação" : "Avaliar produto"}
+        </Text>
 
         <TouchableOpacity className="size-8 items-center justify-center rounded-[10px] border border-gray-400">
           <Ionicons name="close" size={24} color={colors.grays[400]} />
@@ -26,18 +30,26 @@ export function ReviewBottomSheetView({}: ReturnType<
         <Text className="font-semibold text-base text-gray-300">Nota</Text>
 
         <View className="flex-row items-center mb-6 gap-2">
-          <Stars rating={3} />
+          <Stars
+            rating={ratingForm.rating}
+            onChangeRating={handleRatingChange}
+          />
         </View>
 
         <AppInput
+          className="h-[150px]"
           label="COMENTÁRIO"
-          placeholder="Escreva sua avaliação"
-          value=""
+          placeholder={
+            ratingForm.isEditing
+              ? "Edite sua avaliação"
+              : "Escreva sua avaliação"
+          }
+          value={ratingForm.content}
           multiline
           numberOfLines={8}
           textAlign="left"
           containerClassName="mb-8"
-          className="h-[150px]"
+          onChangeText={handleContentChange}
         />
 
         <View className="flex-row gap-3 mb-6">
@@ -46,7 +58,7 @@ export function ReviewBottomSheetView({}: ReturnType<
           </AppButton>
 
           <AppButton className="flex-1" onPress={() => {}}>
-            Enviar
+            {ratingForm.isEditing ? "Atualizar" : "Enviar"}
           </AppButton>
         </View>
       </View>
