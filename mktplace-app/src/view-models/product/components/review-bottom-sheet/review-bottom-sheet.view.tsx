@@ -4,6 +4,7 @@ import { Text, TouchableOpacity, View } from "react-native";
 import { AppButton } from "@/shared/components/app-button";
 import { AppInput } from "@/shared/components/app-input";
 
+import { Stars } from "@/view-models/product/components/review-bottom-sheet/components/stars";
 import { useReviewBottomSheetViewModel } from "@/view-models/product/components/review-bottom-sheet/review-bottom-sheet.model";
 
 import { colors } from "@/styles/colors";
@@ -25,11 +26,7 @@ export function ReviewBottomSheetView({}: ReturnType<
         <Text className="font-semibold text-base text-gray-300">Nota</Text>
 
         <View className="flex-row items-center mb-6 gap-2">
-          <Ionicons name="star-outline" size={32} />
-          <Ionicons name="star-outline" size={32} />
-          <Ionicons name="star-outline" size={32} />
-          <Ionicons name="star-outline" size={32} />
-          <Ionicons name="star-outline" size={32} />
+          <Stars rating={3} />
         </View>
 
         <AppInput
