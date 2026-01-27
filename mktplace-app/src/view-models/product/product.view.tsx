@@ -15,7 +15,6 @@ export function ProductView({
   productDetail,
   error,
   comments,
-  errorComments,
   isLoadingComments,
   isLoading,
   isRefetching,
@@ -24,6 +23,7 @@ export function ProductView({
   handleRefetch,
   handleEndReached,
   handleAddToCart,
+  handleOpenReviewBottomSheet,
 }: ReturnType<typeof useProductModel>) {
   if (error) {
     return <Error />;
@@ -43,7 +43,12 @@ export function ProductView({
         refreshing={isRefetching}
         contentContainerClassName="pb-6"
         renderItem={({ item }) => <CommentItem comment={item} />}
-        ListHeaderComponent={() => <Header productDetails={productDetail} />}
+        ListHeaderComponent={() => (
+          <Header
+            productDetails={productDetail}
+            onOpenReviewBottomSheet={handleOpenReviewBottomSheet}
+          />
+        )}
         ListFooterComponent={() => (
           <ListFooter isLoadingMore={isFetchingNextPage} />
         )}

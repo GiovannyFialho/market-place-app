@@ -1,17 +1,19 @@
 import { useGetProductCommentsInfiniteQuery } from "@/shared/queries/product/use-get-product-comments-infinite-query";
 import { useGetProductDetails } from "@/shared/queries/product/use-get-product-details";
+import { useBottomSheetStore } from "@/shared/store/bottom-sheet-store";
 import { useCartStore } from "@/shared/store/cart-store";
 import { useModalStore } from "@/shared/store/modal-store";
 import { AddToCartSuccessModal } from "@/view-models/product/components/add-to-cart-success-modal";
+import { ReviewBottomSheet } from "@/view-models/product/components/review-bottom-sheet";
 import { router } from "expo-router";
 import { createElement } from "react";
 
-export function useProductModel(prodcutId: number) {
+export function useProductModel(productId: number) {
   const {
     data: productDetail,
     isLoading,
     error,
-  } = useGetProductDetails(prodcutId);
+  } = useGetProductDetails(productId);
 
   const {
     comments,
@@ -22,11 +24,11 @@ export function useProductModel(prodcutId: number) {
     error: errorComments,
     isRefetching,
     isFetchingNextPage,
-  } = useGetProductCommentsInfiniteQuery(prodcutId);
+  } = useGetProductCommentsInfiniteQuery(productId);
 
   const { addProduct } = useCartStore();
-
   const { open, close } = useModalStore();
+  const { open: openBottomSheet } = useBottomSheetStore();
 
   function handleLoadMore() {
     if (hasNextPage && !isFetchingNextPage) {
@@ -76,6 +78,14 @@ export function useProductModel(prodcutId: number) {
     );
   }
 
+  function handleOpenReviewBottomSheet() {
+    if (!productDetail) return;
+
+    openBottomSheet({
+      content: createElement(ReviewBottomSheet, { productId }),
+    });
+  }
+
   return {
     productDetail,
     isLoading,
@@ -89,5 +99,6 @@ export function useProductModel(prodcutId: number) {
     handleRefetch,
     handleEndReached,
     handleAddToCart,
+    handleOpenReviewBottomSheet,
   };
 }
