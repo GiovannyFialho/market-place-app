@@ -1,3 +1,7 @@
+import { useCartStore } from "@/shared/store/cart-store";
+
 export function useCartViewModel() {
-  return {};
+  const { products } = useCartStore();
+
+  return { products };
 }
