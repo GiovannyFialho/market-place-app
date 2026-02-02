@@ -17,7 +17,7 @@ export function CartView({ products }: ReturnType<typeof useCartViewModel>) {
         contentContainerClassName="px-6"
         ListHeaderComponent={<CartHeader />}
         renderItem={({ item }) => <ProductCartCard product={item} />}
-        ListFooterComponent={<CartFooter />}
+        ListFooterComponent={products.length > 0 ? <CartFooter /> : null}
         ListEmptyComponent={<EmptyList />}
       />
     </SafeAreaView>

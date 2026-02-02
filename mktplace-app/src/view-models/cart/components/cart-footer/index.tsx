@@ -3,10 +3,13 @@ import { Text, TouchableOpacity, View } from "react-native";
 
 import { AppButton } from "@/shared/components/app-button";
 import { AppPriceText } from "@/shared/components/app-price-text";
+import { useCartStore } from "@/shared/store/cart-store";
 
 import { colors } from "@/styles/colors";
 
 export function CartFooter() {
+  const { total } = useCartStore();
+
   return (
     <View className="bg-white p-4 rounded-lg mt-6">
       <View className="flex-row justify-between items-center mb-4">
@@ -15,7 +18,7 @@ export function CartFooter() {
         </Text>
 
         <AppPriceText
-          value={190}
+          value={total}
           classNameCurrency="text-base text-gray-900 font-bold"
           classNameValue="text-base text-gray-900 font-bold"
         />
