@@ -17,16 +17,16 @@ export async function signUp(userData: SignUpHttpParams) {
   return data;
 }
 
-export const signIn = async (userData: SignInHttpParams) => {
+export async function signIn(userData: SignInHttpParams) {
   const { data } = await marketPlaceAPIClient.post<AuthResponse>(
     "/auth/login",
     userData,
   );
 
   return data;
-};
+}
 
-export const uploadAvatar = async (avatarUri: string) => {
+export async function uploadAvatar(avatarUri: string) {
   const formData = new FormData();
 
   formData.append("avatar", {
@@ -43,4 +43,4 @@ export const uploadAvatar = async (avatarUri: string) => {
   data.url = `${baseURL}${data.url}`;
 
   return data;
-};
+}
