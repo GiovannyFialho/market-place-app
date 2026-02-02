@@ -8,7 +8,10 @@ import { CartHeader } from "@/view-models/cart/components/cart-header";
 import { EmptyList } from "@/view-models/cart/components/empty-list";
 import { ProductCartCard } from "@/view-models/cart/components/product-cart-card";
 
-export function CartView({ products }: ReturnType<typeof useCartViewModel>) {
+export function CartView({
+  products,
+  openCartBottomSheet,
+}: ReturnType<typeof useCartViewModel>) {
   return (
     <SafeAreaView>
       <FlatList
@@ -17,7 +20,11 @@ export function CartView({ products }: ReturnType<typeof useCartViewModel>) {
         contentContainerClassName="px-6"
         ListHeaderComponent={<CartHeader />}
         renderItem={({ item }) => <ProductCartCard product={item} />}
-        ListFooterComponent={products.length > 0 ? <CartFooter /> : null}
+        ListFooterComponent={
+          products.length > 0 ? (
+            <CartFooter openCartBottomSheet={openCartBottomSheet} />
+          ) : null
+        }
         ListEmptyComponent={<EmptyList />}
       />
     </SafeAreaView>

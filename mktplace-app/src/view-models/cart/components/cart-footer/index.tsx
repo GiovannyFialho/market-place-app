@@ -7,7 +7,11 @@ import { useCartStore } from "@/shared/store/cart-store";
 
 import { colors } from "@/styles/colors";
 
-export function CartFooter() {
+interface CartFooterParams {
+  openCartBottomSheet: () => void;
+}
+
+export function CartFooter({ openCartBottomSheet }: CartFooterParams) {
   const { total } = useCartStore();
 
   return (
@@ -30,7 +34,10 @@ export function CartFooter() {
             Cartões de crédito
           </Text>
 
-          <TouchableOpacity className="flex-row items-center">
+          <TouchableOpacity
+            className="flex-row items-center"
+            onPress={openCartBottomSheet}
+          >
             <Ionicons
               name="card-outline"
               size={20}
