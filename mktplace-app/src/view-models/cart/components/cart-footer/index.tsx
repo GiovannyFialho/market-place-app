@@ -1,17 +1,31 @@
 import { Ionicons } from "@expo/vector-icons";
-import { Text, TouchableOpacity, View } from "react-native";
+import {
+  ActivityIndicator,
+  FlatList,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
 import { AppButton } from "@/shared/components/app-button";
 import { AppPriceText } from "@/shared/components/app-price-text";
 import { useCartStore } from "@/shared/store/cart-store";
 
+import { CreditCard } from "@/shared/interfaces/credit-card";
+
 import { colors } from "@/styles/colors";
 
 interface CartFooterParams {
+  creditCards: CreditCard[];
+  isLoadingCreditCards: boolean;
   openCartBottomSheet: () => void;
 }
 
-export function CartFooter({ openCartBottomSheet }: CartFooterParams) {
+export function CartFooter({
+  creditCards,
+  isLoadingCreditCards,
+  openCartBottomSheet,
+}: CartFooterParams) {
   const { total } = useCartStore();
 
   return (
@@ -49,6 +63,22 @@ export function CartFooter({ openCartBottomSheet }: CartFooterParams) {
             </Text>
           </TouchableOpacity>
         </View>
+
+        {isLoadingCreditCards ? (
+          <View className="py-4 items-center">
+            <ActivityIndicator size="small" color={colors["purple-base"]} />
+
+            <Text className="text-gray-500 text-sm mt-2">
+              Carregando cartões
+            </Text>
+          </View>
+        ) : (
+          <FlatList
+            data={creditCards}
+            renderItem={({ item }) => <Text>{item.titularName}</Text>}
+            keyExtractor={(item) => `credit-card-id-${item.id}`}
+          />
+        )}
 
         <AppButton className="mt-4">Confirmar compra</AppButton>
       </View>

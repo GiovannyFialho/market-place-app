@@ -8,9 +8,9 @@ import { useAddCardBottomSheetViewModel } from "@/view-models/cart/components/ad
 
 import { colors } from "@/styles/colors";
 
-export function AddCardBottomSheetView({}: ReturnType<
-  typeof useAddCardBottomSheetViewModel
->) {
+export function AddCardBottomSheetView({
+  handleCreateCreditCard,
+}: ReturnType<typeof useAddCardBottomSheetViewModel>) {
   return (
     <ScrollView className="flex-1">
       <View className="p-8">

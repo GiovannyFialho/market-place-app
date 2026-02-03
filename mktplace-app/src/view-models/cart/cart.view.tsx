@@ -10,6 +10,8 @@ import { ProductCartCard } from "@/view-models/cart/components/product-cart-card
 
 export function CartView({
   products,
+  creditCards,
+  isLoadingCreditCards,
   openCartBottomSheet,
 }: ReturnType<typeof useCartViewModel>) {
   return (
@@ -22,8 +24,12 @@ export function CartView({
         renderItem={({ item }) => <ProductCartCard product={item} />}
         ListFooterComponent={
           products.length > 0 ? (
-            <CartFooter openCartBottomSheet={openCartBottomSheet} />
-          ) : null
+            <CartFooter
+              creditCards={creditCards}
+              isLoadingCreditCards={isLoadingCreditCards}
+              openCartBottomSheet={openCartBottomSheet}
+            />
+          ) : undefined
         }
         ListEmptyComponent={<EmptyList />}
       />
