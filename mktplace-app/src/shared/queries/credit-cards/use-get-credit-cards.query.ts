@@ -8,4 +8,6 @@ export function useGetCreditCards() {
     queryKey: ["credit-cards"],
     staleTime: 1000 * 60 * 5, // 5min
   });
+
+  return query;
 }
