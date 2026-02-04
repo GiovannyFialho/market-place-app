@@ -10,6 +10,8 @@ import { colors } from "@/styles/colors";
 
 export function AddCardBottomSheetView({
   control,
+  cardNumberMask,
+  expirationDateMask,
 }: ReturnType<typeof useAddCardBottomSheetViewModel>) {
   return (
     <ScrollView className="flex-1">
@@ -44,6 +46,8 @@ export function AddCardBottomSheetView({
             label="NÚMERO"
             placeholder="Número do cartão"
             keyboardType="numeric"
+            mask={cardNumberMask}
+            maxLength={19}
           />
 
           <View className="flex-row gap-4">
@@ -55,6 +59,7 @@ export function AddCardBottomSheetView({
                 label="VENCIMENTO"
                 placeholder="MM/AA"
                 keyboardType="numeric"
+                mask={expirationDateMask}
                 maxLength={5}
               />
             </View>
