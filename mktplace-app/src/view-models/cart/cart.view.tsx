@@ -15,7 +15,7 @@ export function CartView({
   openCartBottomSheet,
 }: ReturnType<typeof useCartViewModel>) {
   return (
-    <SafeAreaView>
+    <SafeAreaView className="flex-1">
       <FlatList
         data={products}
         keyExtractor={({ id }) => `product-cart-id-${id}`}
