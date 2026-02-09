@@ -12,6 +12,7 @@ export function AddCardBottomSheetView({
   control,
   cardNumberMask,
   expirationDateMask,
+  handleCreateCreditCard,
 }: ReturnType<typeof useAddCardBottomSheetViewModel>) {
   return (
     <ScrollView className="flex-1">
@@ -83,7 +84,7 @@ export function AddCardBottomSheetView({
           </View>
 
           <View className="flex-1">
-            <AppButton>Salvar</AppButton>
+            <AppButton onPress={handleCreateCreditCard}>Salvar</AppButton>
           </View>
         </View>
       </View>
