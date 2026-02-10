@@ -91,6 +91,7 @@ export function CartFooterView({
         <AppButton
           className="mt-4"
           isLoading={isLoadingOrder}
+          isDisabled={!selectedCreditCard?.id}
           onPress={submitOrderMutation}
         >
           Confirmar compra

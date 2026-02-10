@@ -1,19 +1,22 @@
 import { Ionicons } from "@expo/vector-icons";
 import { createElement } from "react";
 
-import { useModalStore } from "@/shared/store/modal-store";
-
 import {
   SelectionModal,
   type SelectionModalProps,
 } from "@/shared/components/modals/selection-modal";
+import {
+  SuccessModal,
+  type SuccessModalProps,
+} from "@/shared/components/modals/success-modal";
+import { useModalStore } from "@/shared/store/modal-store";
 
 export type SelectionVariant = "primary" | "secondary" | "danger";
 export interface SelectionOption {
   text: string;
-  onPress: () => void;
   icon?: keyof typeof Ionicons.glyphMap;
   variant?: SelectionVariant;
+  onPress: () => void;
 }
 
 export const useAppModal = () => {
@@ -36,5 +39,21 @@ export const useAppModal = () => {
       } as SelectionModalProps),
     );
   };
-  return { showSelection };
+
+  const showSuccess = (config: SuccessModalProps) => {
+    open(
+      createElement(SuccessModal, {
+        ...config,
+        onButtonPress: () => {
+          if (config.onButtonPress) {
+            config.onButtonPress();
+          }
+
+          close();
+        },
+      }),
+    );
+  };
+
+  return { showSelection, showSuccess };
 };

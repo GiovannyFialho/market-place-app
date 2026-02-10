@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+import { useAppModal } from "@/shared/hooks/useAppModal";
 import { CreditCard } from "@/shared/interfaces/credit-card";
 import { useSubmitOrderMutation } from "@/shared/queries/orders/use-submit-order.mutation";
 import { useCartStore } from "@/shared/store/cart-store";
@@ -10,6 +11,8 @@ export function useCartFooterViewModel() {
     useState<null | CreditCard>(null);
 
   const { products, total, clearCart } = useCartStore();
+
+  const { showSuccess } = useAppModal();
 
   const createOrderMutation = useSubmitOrderMutation();
 
@@ -26,7 +29,12 @@ export function useCartFooterViewModel() {
 
     clearCart();
 
-    router.push("/orders");
+    showSuccess({
+      title: "Sucesso!",
+      message: "Pedido realizado com sucesso!",
+      buttonText: "Ver pedidos",
+      onButtonPress: () => router.push("/orders"),
+    });
   }
 
   return {
