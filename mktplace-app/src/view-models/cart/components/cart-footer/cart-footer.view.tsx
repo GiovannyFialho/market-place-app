@@ -24,6 +24,8 @@ export function CartFooterView({
   isLoadingCreditCards,
   selectedCreditCard,
   total,
+  submitOrderMutation,
+  isLoadingOrder,
   setSelectedCreditCard,
   openCartBottomSheet,
 }: CartFooterViewProps) {
@@ -86,7 +88,13 @@ export function CartFooterView({
           />
         )}
 
-        <AppButton className="mt-4">Confirmar compra</AppButton>
+        <AppButton
+          className="mt-4"
+          isLoading={isLoadingOrder}
+          onPress={submitOrderMutation}
+        >
+          Confirmar compra
+        </AppButton>
       </View>
     </View>
   );
