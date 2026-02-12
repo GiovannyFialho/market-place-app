@@ -1,5 +1,7 @@
-import { FlatList, Text } from "react-native";
+import { FlatList } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+
+import { OrderItem } from "@/view-models/orders/components/order-item";
 
 import { useOrdersViewModel } from "@/view-models/orders/orders.model";
 
@@ -9,7 +11,8 @@ export function OrdersView({ orders }: ReturnType<typeof useOrdersViewModel>) {
       <FlatList
         data={orders}
         keyExtractor={({ id }) => `order-${id}`}
-        renderItem={({ item: order }) => <Text>{order.productName}</Text>}
+        renderItem={({ item: order }) => <OrderItem order={order} />}
+        contentContainerClassName="px-[16px] pb-[120px]"
       />
     </SafeAreaView>
   );
