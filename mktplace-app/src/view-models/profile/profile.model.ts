@@ -23,9 +23,9 @@ export function useProfileViewModel() {
   } = useForm<ProfileFormData>({
     resolver: zodResolver(profileSchema),
     defaultValues: {
-      name: "",
-      email: "",
-      phone: "",
+      name: user?.name ?? "",
+      email: user?.email ?? "",
+      phone: user?.phone ?? "",
       newPassword: undefined,
       confirmNewPassword: undefined,
     },

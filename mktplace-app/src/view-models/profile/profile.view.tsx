@@ -4,7 +4,9 @@ import { Image, ScrollView, Text, TouchableOpacity } from "react-native";
 import { AppButton } from "@/shared/components/app-button";
 import { AppInputController } from "@/shared/components/app-input-controller";
 import { KeyboardContainer } from "@/shared/components/keyboard-container";
+import { buildImageURL } from "@/shared/helpers/build-image-url";
 
+import { Header } from "@/view-models/profile/components/header";
 import { useProfileViewModel } from "@/view-models/profile/profile.model";
 
 export function ProfileView({
@@ -14,10 +16,12 @@ export function ProfileView({
   return (
     <KeyboardContainer>
       <ScrollView className="flex-1 px-[40px]">
+        <Header />
+
         <TouchableOpacity className="w-[120px] h-[120px] rounded-xl items-center justify-center bg-shape self-center mb-8">
           {avatarUri ? (
             <Image
-              source={{ uri: avatarUri }}
+              source={{ uri: buildImageURL(avatarUri) }}
               className="w-full h-full rounded-xl"
               resizeMode="cover"
             />
@@ -25,6 +29,10 @@ export function ProfileView({
             <Ionicons name="cloud-upload-outline" size={32} />
           )}
         </TouchableOpacity>
+
+        <Text className="text-base mt-6 font-bold text-gray-500">
+          Dados pessoais
+        </Text>
 
         <AppInputController
           leftIcon="person-outline"
