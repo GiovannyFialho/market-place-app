@@ -1,9 +1,9 @@
 import { useMutation } from "@tanstack/react-query";
-
-import { useUserStore } from "@/shared/store/user-store";
+import { Toast } from "toastify-react-native";
 
 import type { SignInHttpParams } from "@/shared/interfaces/http/sign-in";
 import { signIn } from "@/shared/services/auth.service";
+import { useUserStore } from "@/shared/store/user-store";
 
 export function useSignInMutation() {
   const { setSession } = useUserStore();
@@ -13,8 +13,8 @@ export function useSignInMutation() {
     onSuccess: (response) => {
       setSession(response);
     },
-    onError: (error) => {
-      console.log({ error });
+    onError: (error: Error) => {
+      Toast.error(error.message, "top");
     },
   });
 

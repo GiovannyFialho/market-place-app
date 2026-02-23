@@ -1,9 +1,9 @@
 import { useMutation } from "@tanstack/react-query";
-
-import { useUserStore } from "@/shared/store/user-store";
+import { Toast } from "toastify-react-native";
 
 import type { SignUpHttpParams } from "@/shared/interfaces/http/sign-up";
 import { signUp } from "@/shared/services/auth.service";
+import { useUserStore } from "@/shared/store/user-store";
 
 type UserRegisterMutationParams = {
   onSuccess?: () => void;
@@ -25,8 +25,8 @@ export function useSignUpMutation({
 
       onSuccess?.();
     },
-    onError: (error) => {
-      console.log("signUp error:::: ", error);
+    onError: (error: Error) => {
+      Toast.error(error.message, "top");
     },
   });
 

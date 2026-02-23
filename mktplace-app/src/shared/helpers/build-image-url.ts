@@ -7,5 +7,9 @@ export function buildImageURL(originalURL: string) {
     return originalURL;
   }
 
+  if (originalURL.startsWith("/")) {
+    return `${baseURL}${originalURL}`;
+  }
+
   return originalURL.replace(/^http:\/\/[^/]+:3001/, baseURL);
 }

@@ -1,13 +1,16 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
+import { CameraType } from "expo-image-picker";
 import { useForm } from "react-hook-form";
 
 import { useAppModal } from "@/shared/hooks/useAppModal";
 import { useUpdateProfileMutation } from "@/shared/queries/profile/use-update-profile.mutation";
 import { useUserStore } from "@/shared/store/user-store";
 
+import { useImage } from "@/shared/hooks/useImage";
+import { useUploadAvatarMutation } from "@/shared/queries/auth/use-upload-avatar.mutation";
 import { useCartStore } from "@/shared/store/cart-store";
 import { useModalStore } from "@/shared/store/modal-store";
+
 import {
   profileSchema,
   type ProfileFormData,
@@ -19,11 +22,17 @@ export function useProfileViewModel() {
   const { close } = useModalStore();
   const { clearCart } = useCartStore();
 
-  const [avatarUri, setAvatarUri] = useState<string | null>(
-    user?.avatarUrl ?? null,
-  );
-
+  const uploadAvatarMutation = useUploadAvatarMutation();
   const updateProfileMutation = useUpdateProfileMutation();
+
+  const { loading, handleSelectImage } = useImage({
+    callback: async (url) => {
+      if (url) {
+        await uploadAvatarMutation.mutateAsync(url);
+      }
+    },
+    cameraType: CameraType.front,
+  });
 
   const {
     control,
@@ -68,6 +77,7 @@ export function useProfileViewModel() {
           variant: "danger",
           onPress: () => {
             clearCart();
+            close();
             logout();
           },
         },
@@ -81,5 +91,13 @@ export function useProfileViewModel() {
     await updateProfileMutation.mutateAsync(userData);
   });
 
-  return { control, avatarUri, onSubmit, isSubmitting, handleLogout };
+  return {
+    control,
+    avatarUri: user?.avatarUrl ?? null,
+    isSubmitting,
+    loading,
+    onSubmit,
+    handleLogout,
+    handleSelectImage,
+  };
 }

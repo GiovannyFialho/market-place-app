@@ -12,16 +12,21 @@ import { useProfileViewModel } from "@/view-models/profile/profile.model";
 export function ProfileView({
   control,
   avatarUri,
-  onSubmit,
   isSubmitting,
+  loading,
+  onSubmit,
   handleLogout,
+  handleSelectImage,
 }: ReturnType<typeof useProfileViewModel>) {
   return (
     <KeyboardContainer>
       <ScrollView className="flex-1 px-[40px]">
         <Header onLogout={handleLogout} />
 
-        <TouchableOpacity className="w-[120px] h-[120px] rounded-xl items-center justify-center bg-shape self-center mb-8">
+        <TouchableOpacity
+          className="w-[120px] h-[120px] rounded-xl items-center justify-center bg-shape self-center mb-8"
+          onPress={handleSelectImage}
+        >
           {avatarUri ? (
             <Image
               source={{ uri: buildImageURL(avatarUri) }}
@@ -65,7 +70,7 @@ export function ProfileView({
 
         <AppInputController
           leftIcon="lock-closed-outline"
-          label="NOVA SENHA"
+          label="SENHA ATUAL"
           control={control}
           name="password"
           placeholder="Nova senha"
@@ -74,7 +79,7 @@ export function ProfileView({
 
         <AppInputController
           leftIcon="lock-closed-outline"
-          label="CONFIRMAR NOVA SENHA"
+          label="SUA NOVA SENHA"
           control={control}
           name="newPassword"
           placeholder="Confirme sua nova senha"
