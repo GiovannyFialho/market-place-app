@@ -11,15 +11,12 @@ export const profileSchema = z
     phone: z.string().refine((value) => /^\d{11}$/.test(value), {
       message: "Telefone deve ter 11 dígitos",
     }),
+    password: z.string().optional(),
     newPassword: z.string().optional(),
-    confirmNewPassword: z.string().optional(),
   })
-  .refine(
-    (data) => !data.newPassword || data.newPassword === data.confirmNewPassword,
-    {
-      message: "As senhas não conferem",
-      path: ["confirmNewPassword"],
-    },
-  );
+  .refine((data) => !data.password || data.password === data.newPassword, {
+    message: "As senhas não conferem",
+    path: ["confirmNewPassword"],
+  });
 
 export type ProfileFormData = z.infer<typeof profileSchema>;

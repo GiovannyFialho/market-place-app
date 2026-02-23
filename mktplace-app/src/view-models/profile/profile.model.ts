@@ -2,6 +2,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 
+import { useUpdateProfileMutation } from "@/shared/queries/profile/use-update-profile.mutation";
 import { useUserStore } from "@/shared/store/user-store";
 
 import {
@@ -16,24 +17,41 @@ export function useProfileViewModel() {
     user?.avatarUrl ?? null,
   );
 
+  const updateProfileMutation = useUpdateProfileMutation();
+
   const {
     control,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<ProfileFormData>({
     resolver: zodResolver(profileSchema),
     defaultValues: {
       name: user?.name ?? "",
       email: user?.email ?? "",
       phone: user?.phone ?? "",
+      password: undefined,
       newPassword: undefined,
-      confirmNewPassword: undefined,
     },
   });
 
-  const onSubmit = handleSubmit((data) => {
-    console.log(data);
+  const validatePasswords = (userData: ProfileFormData) => {
+    if (!userData.password) return false;
+
+    if (
+      userData.password === userData.newPassword &&
+      userData.password?.length > 0
+    ) {
+      return false;
+    }
+
+    return true;
+  };
+
+  const onSubmit = handleSubmit(async (userData) => {
+    if (!validatePasswords(userData)) return;
+
+    await updateProfileMutation.mutateAsync(userData);
   });
 
-  return { control, avatarUri, onSubmit };
+  return { control, avatarUri, onSubmit, isSubmitting };
 }

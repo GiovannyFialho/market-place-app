@@ -12,6 +12,8 @@ import { useProfileViewModel } from "@/view-models/profile/profile.model";
 export function ProfileView({
   control,
   avatarUri,
+  onSubmit,
+  isSubmitting,
 }: ReturnType<typeof useProfileViewModel>) {
   return (
     <KeyboardContainer>
@@ -64,7 +66,7 @@ export function ProfileView({
           leftIcon="lock-closed-outline"
           label="NOVA SENHA"
           control={control}
-          name="newPassword"
+          name="password"
           placeholder="Nova senha"
           secureTextEntry
         />
@@ -73,12 +75,14 @@ export function ProfileView({
           leftIcon="lock-closed-outline"
           label="CONFIRMAR NOVA SENHA"
           control={control}
-          name="confirmNewPassword"
+          name="newPassword"
           placeholder="Confirme sua nova senha"
           secureTextEntry
         />
 
-        <AppButton className="mt-6">Atualizar cadastro</AppButton>
+        <AppButton className="mt-6" onPress={onSubmit} isLoading={isSubmitting}>
+          Atualizar cadastro
+        </AppButton>
       </ScrollView>
     </KeyboardContainer>
   );
