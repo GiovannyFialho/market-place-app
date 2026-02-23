@@ -8,8 +8,8 @@ import { colors } from "@/styles/colors";
 export type SuccessModalProps = {
   title: string;
   message?: string;
-  buttonText: string;
-  onButtonPress: () => void;
+  buttonText?: string;
+  onButtonPress?: () => void;
 };
 
 export function SuccessModal({
