@@ -5,6 +5,7 @@ import { AppButton } from "@/shared/components/app-button";
 import { AppInputController } from "@/shared/components/app-input-controller";
 
 import { useAddCardBottomSheetViewModel } from "@/view-models/cart/components/add-card-bottom-sheet/add-card-bottom-sheet.model";
+import { CreditCard } from "@/view-models/cart/components/add-card-bottom-sheet/components/credit-card";
 
 import { colors } from "@/styles/colors";
 
@@ -30,6 +31,8 @@ export function AddCardBottomSheetView({
             />
           </TouchableOpacity>
         </View>
+
+        <CreditCard />
 
         <View className="mt-6 gap-4">
           <AppInputController
