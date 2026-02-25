@@ -11,9 +11,13 @@ import { colors } from "@/styles/colors";
 
 export function AddCardBottomSheetView({
   control,
-  cardNumberMask,
-  expirationDateMask,
   handleCreateCreditCard,
+  cardNumberMask,
+  handleFieldFocus,
+  handleFieldBlur,
+  isFlipped,
+  focusedField,
+  expirationDateMask,
 }: ReturnType<typeof useAddCardBottomSheetViewModel>) {
   return (
     <ScrollView className="flex-1">
@@ -32,7 +36,7 @@ export function AddCardBottomSheetView({
           </TouchableOpacity>
         </View>
 
-        <CreditCard />
+        <CreditCard isFlipped={isFlipped} focusedField={focusedField} />
 
         <View className="mt-6 gap-4">
           <AppInputController
@@ -41,6 +45,8 @@ export function AddCardBottomSheetView({
             leftIcon="person-outline"
             label="NOME DO TITULAR"
             placeholder="Nome completo"
+            onFocus={() => handleFieldFocus("name")}
+            onBlur={handleFieldBlur}
           />
 
           <AppInputController
@@ -52,6 +58,8 @@ export function AddCardBottomSheetView({
             keyboardType="numeric"
             mask={cardNumberMask}
             maxLength={19}
+            onFocus={() => handleFieldFocus("number")}
+            onBlur={handleFieldBlur}
           />
 
           <View className="flex-row gap-4">
@@ -65,6 +73,8 @@ export function AddCardBottomSheetView({
                 keyboardType="numeric"
                 mask={expirationDateMask}
                 maxLength={5}
+                onFocus={() => handleFieldFocus("expiry")}
+                onBlur={handleFieldBlur}
               />
             </View>
 
@@ -76,6 +86,8 @@ export function AddCardBottomSheetView({
                 label="CVV"
                 placeholder="000"
                 keyboardType="numeric"
+                onFocus={() => handleFieldFocus("cvv")}
+                onBlur={handleFieldBlur}
               />
             </View>
           </View>

@@ -1,3 +1,3 @@
-export function useCreditCardViewModel() {
+export function useCreditCardViewModel(isFlipped: boolean) {
   return {};
 }
