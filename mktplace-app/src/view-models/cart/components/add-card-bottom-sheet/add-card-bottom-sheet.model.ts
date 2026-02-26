@@ -94,8 +94,6 @@ export function useAddCardBottomSheetViewModel() {
   }
 
   function handleFieldFocus(field: FocusedField) {
-    console.log(field);
-
     if (blurTimeoutRef.current) {
       clearTimeout(blurTimeoutRef.current);
     }
