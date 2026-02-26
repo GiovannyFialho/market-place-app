@@ -1,10 +1,10 @@
+import clsx from "clsx";
 import { LinearGradient } from "expo-linear-gradient";
 import { Text, View } from "react-native";
 import Animated from "react-native-reanimated";
 
 import { FocusedField } from "@/view-models/cart/components/add-card-bottom-sheet/add-card-bottom-sheet.model";
 import { useCreditCardViewModel } from "@/view-models/cart/components/add-card-bottom-sheet/components/credit-card/credit-card.model";
-import clsx from "clsx";
 
 const PURPLE_GRADIENT: readonly [string, string, string] = [
   "#5B3A8F",
@@ -14,6 +14,8 @@ const PURPLE_GRADIENT: readonly [string, string, string] = [
 
 export function CreditCardView({
   focusedField,
+  frontAnimatedStyle,
+  backAnimatedStyle,
 }: ReturnType<typeof useCreditCardViewModel> & {
   focusedField: FocusedField | null;
 }) {
@@ -21,6 +23,7 @@ export function CreditCardView({
     <View className="h-[192px]">
       <Animated.View
         style={[
+          frontAnimatedStyle,
           {
             position: "absolute",
             width: "100%",
@@ -80,6 +83,7 @@ export function CreditCardView({
 
       <Animated.View
         style={[
+          backAnimatedStyle,
           {
             position: "absolute",
             width: "100%",
