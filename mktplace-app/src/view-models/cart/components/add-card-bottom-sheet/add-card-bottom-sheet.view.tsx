@@ -15,9 +15,11 @@ export function AddCardBottomSheetView({
   cardNumberMask,
   handleFieldFocus,
   handleFieldBlur,
+  closeBottomSheet,
   isFlipped,
   focusedField,
   expirationDateMask,
+  cardData,
 }: ReturnType<typeof useAddCardBottomSheetViewModel>) {
   return (
     <ScrollView className="flex-1">
@@ -27,7 +29,10 @@ export function AddCardBottomSheetView({
             Adicionar cartão
           </Text>
 
-          <TouchableOpacity className="w-8 items-center justify-center border border-gray-400 rounded-[10px]">
+          <TouchableOpacity
+            className="w-8 items-center justify-center border border-gray-400 rounded-[10px]"
+            onPress={closeBottomSheet}
+          >
             <Ionicons
               name="close-outline"
               size={24}
@@ -36,7 +41,11 @@ export function AddCardBottomSheetView({
           </TouchableOpacity>
         </View>
 
-        <CreditCard isFlipped={isFlipped} focusedField={focusedField} />
+        <CreditCard
+          isFlipped={isFlipped}
+          focusedField={focusedField}
+          cardData={cardData}
+        />
 
         <View className="mt-6 gap-4">
           <AppInputController
@@ -86,6 +95,7 @@ export function AddCardBottomSheetView({
                 label="CVV"
                 placeholder="000"
                 keyboardType="numeric"
+                maxLength={3}
                 onFocus={() => handleFieldFocus("cvv")}
                 onBlur={handleFieldBlur}
               />
@@ -95,7 +105,9 @@ export function AddCardBottomSheetView({
 
         <View className="flex-row gap-4 pb-5 mt-8">
           <View className="flex-1">
-            <AppButton variant="outlined">Cancelar</AppButton>
+            <AppButton variant="outlined" onPress={closeBottomSheet}>
+              Cancelar
+            </AppButton>
           </View>
 
           <View className="flex-1">

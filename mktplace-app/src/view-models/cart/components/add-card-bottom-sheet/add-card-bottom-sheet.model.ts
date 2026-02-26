@@ -44,15 +44,16 @@ export function useAddCardBottomSheetViewModel() {
 
   const { close: closeBottomSheet } = useBottomSheetStore();
 
-  const { control, handleSubmit, setError } = useForm<CreditCardFormData>({
-    defaultValues: {
-      titularName: "",
-      number: "",
-      expirationDate: "",
-      CVV: "",
-    },
-    resolver: zodResolver(creditCardSchema),
-  });
+  const { control, watch, handleSubmit, setError } =
+    useForm<CreditCardFormData>({
+      defaultValues: {
+        titularName: "",
+        number: "",
+        expirationDate: "",
+        CVV: "",
+      },
+      resolver: zodResolver(creditCardSchema),
+    });
 
   const handleCreateCreditCard = handleSubmit(
     async ({ number, expirationDate: rawExpirationDate, CVV }) => {
@@ -109,14 +110,23 @@ export function useAddCardBottomSheetViewModel() {
 
   const isFlipped = focusedField === "cvv";
 
+  const watchedValues = watch();
+
   return {
     control,
     handleCreateCreditCard,
     cardNumberMask,
     handleFieldFocus,
     handleFieldBlur,
+    closeBottomSheet,
     isFlipped,
     focusedField,
     expirationDateMask,
+    cardData: {
+      number: watchedValues.number,
+      name: watchedValues.titularName,
+      expiry: watchedValues.expirationDate,
+      cvv: watchedValues.CVV,
+    },
   };
 }
