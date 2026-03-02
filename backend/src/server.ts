@@ -43,6 +43,6 @@ import path = require("path");
     },
     () => {
       console.log("Api rodando na porta 3001");
-    }
+    },
   );
 })();

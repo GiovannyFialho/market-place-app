@@ -1,10 +1,10 @@
-import { compare } from "bcrypt";
-import { RefreshTokenRepository } from "../../../infra/database/typeorm/market-place/repositories/refresh-token.repository";
 import { UserTypeormRepository } from "../../../infra/database/typeorm/market-place/repositories/user.repository";
+import { RefreshTokenRepository } from "../../../infra/database/typeorm/market-place/repositories/refresh-token.repository";
+import { compare } from "bcrypt";
+import { AuthLoginRequest } from "../interfaces/authLoginRequest";
 import { NotFoundError } from "../../../shared/errors/not-found.error";
 import { UnauthenticatedError } from "../../../shared/errors/unauthenticated.error";
 import { JWTService } from "../../../shared/services/jwt.service";
-import { AuthLoginRequest } from "../interfaces/authLoginRequest";
 
 export class AuthenticateUseCase {
   private authRepository: UserTypeormRepository;
@@ -17,7 +17,7 @@ export class AuthenticateUseCase {
     this.jwtService = new JWTService();
   }
 
-  async execute({ email, password }: AuthLoginRequest) {
+  async execute({ email, password, notificationToken }: AuthLoginRequest) {
     const user = await this.authRepository.findByEmail(email);
 
     if (!user) {
@@ -31,6 +31,13 @@ export class AuthenticateUseCase {
     }
 
     await this.refreshTokenRepository.revokeByUserId(user.id!);
+
+    if (notificationToken) {
+      await this.authRepository.updateNotificationToken(
+        user.id!,
+        notificationToken
+      );
+    }
 
     const { accessToken, refreshToken } = this.jwtService.generateTokenPair({
       id: user.id!,
@@ -50,7 +57,7 @@ export class AuthenticateUseCase {
       refreshToken,
       user: {
         ...user,
-        avatarUrl: user.avatar.url,
+        avatarUrl: user.avatar?.url,
       },
     };
   }

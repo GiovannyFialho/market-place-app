@@ -1,7 +1,6 @@
 export interface UploadUserAvatarRequest {
   userId: number;
   file: {
-    originalname?: string;
     filename: string;
     mimetype: string;
     file: NodeJS.ReadableStream;

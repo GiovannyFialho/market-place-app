@@ -1,56 +1,64 @@
-# Backend ⚙️
+# Marketplace - Push Notification - Backend - RocketSeat
 
-This is the backend of the **marketplace** project.
+Este é o backend do projeto **marketplace**.
 
-## 🚀 Technologies
+## 🚀 Tecnologias
 
 - **Node.js**
 - **TypeScript**
 - **TypeORM**
 - **SQLite**
 
-## 📦 Installation and Execution
+## 📦 Instalação e Execução
 
-Follow the steps below to set up and run the project in your local
-environment.
+Siga os passos abaixo para configurar e rodar o projeto em seu ambiente local.
 
-### 1️⃣ Clone the repository
+### 1 Clonar o repositório
 
 ```sh
-git clone https://github.com/brenooliveiranascimento/DT-money-backend.git
-cd dtmoney-backend
+git clone https://github.com/rocketseat-education/marketplace-backend.git
+cd marketplace-backend
 ```
 
-### 2️⃣ Install dependencies
+### 2 Instalar as dependências
 
-Use the package manager **yarn** or **npm** to install all project
-dependencies:
+Utilize o gerenciador de pacotes **yarn** ou **npm** para instalar todas as dependências do projeto:
 
 ```sh
 yarn
-or
+ou
 npm i
 ```
 
-### 3️⃣ Run the migrations
+### 3️ Rodar as migrations
 
-Run the command below to create the tables in the database:
+Execute o comando abaixo para criar as tabelas no banco de dados:
 
 ```sh
 yarn migration:run
-or
+ou
 npm run migration:run
 ```
 
-### 4️⃣ Start the server
+### 4 Pegar credenciais do onesignal
 
-Now, just start the server with:
+Agora, seguindo as instruções da aula ou na documentação do onesignal, deve por as credenciais do app_id e api_key na .env
+Documentação: https://documentation.onesignal.com/reference/rest-api-overview
+```sh
+ONESIGNAL_APP_ID="your-onesignal-app-id"
+ONESIGNAL_API_KEY="your-onesignal-rest-api-key"
+```
+
+
+### 5 Iniciar o servidor
+
+Agora, basta rodar o servidor com:
 
 ```sh
 yarn dev
-or
+ou
 npm run dev
 ```
 
-The backend will be running at `http://localhost:3001`.\
-To access the documentation: `http://localhost:3001/docs`
+O backend estará rodando em `http://localhost:3001`.
+Para acessar a documentação `http://localhost:3001/docs`
