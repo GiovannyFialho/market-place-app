@@ -1,12 +1,15 @@
+import { router } from "expo-router";
+import { createElement } from "react";
+
 import { useGetProductCommentsInfiniteQuery } from "@/shared/queries/product/use-get-product-comments-infinite-query";
 import { useGetProductDetails } from "@/shared/queries/product/use-get-product-details";
+import { localNotificationsService } from "@/shared/services/local-notifications.service";
 import { useBottomSheetStore } from "@/shared/store/bottom-sheet-store";
 import { useCartStore } from "@/shared/store/cart-store";
 import { useModalStore } from "@/shared/store/modal-store";
+
 import { AddToCartSuccessModal } from "@/view-models/product/components/add-to-cart-success-modal";
 import { ReviewBottomSheet } from "@/view-models/product/components/review-bottom-sheet";
-import { router } from "expo-router";
-import { createElement } from "react";
 
 export function useProductModel(productId: number) {
   const {
@@ -66,6 +69,12 @@ export function useProductModel(productId: number) {
       name: productDetail.name,
       price: productDetail.value,
       image: productDetail.photo,
+    });
+
+    localNotificationsService.scheduleCartReminder({
+      productId: productDetail.id,
+      productName: productDetail.name,
+      delayInMinutes: 30,
     });
 
     open(
