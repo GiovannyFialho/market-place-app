@@ -44,7 +44,7 @@ async function setupNotificationChannel() {
   }
 }
 
-interface ScheduleCartReminderInterface {
+interface ScheduleProductInterface {
   productId: number;
   productName: string;
   delayInMinutes: number;
@@ -54,7 +54,7 @@ async function scheduleCartReminder({
   productId,
   productName,
   delayInMinutes,
-}: ScheduleCartReminderInterface) {
+}: ScheduleProductInterface) {
   const hasPermission = await requestPermissions();
 
   if (!hasPermission) {
@@ -63,7 +63,7 @@ async function scheduleCartReminder({
     return;
   }
 
-  const notification = await Notifications.scheduleNotificationAsync({
+  await Notifications.scheduleNotificationAsync({
     identifier: NOTIFICATION_IDS.CART_REMINDER,
     content: {
       title: "Você esqueceu algo no carrinho!",
@@ -75,15 +75,44 @@ async function scheduleCartReminder({
     },
     trigger: {
       type: Notifications.SchedulableTriggerInputTypes.TIME_INTERVAL,
-      seconds: delayInMinutes,
+      seconds: delayInMinutes * 60,
     },
   });
+}
 
-  return notification;
+async function scheduleFeedbackNotification({
+  productId,
+  productName,
+  delayInMinutes,
+}: ScheduleProductInterface) {
+  const hasPermission = await requestPermissions();
+
+  if (!hasPermission) {
+    console.log("[LocalNotifications] - Permission not granted");
+
+    return;
+  }
+
+  await Notifications.scheduleNotificationAsync({
+    identifier: `${NOTIFICATION_IDS.PURCHASE_FEEDBACK}-${productId}`,
+    content: {
+      title: "⭐️ Como foi a sua compra?",
+      body: `Você realizou o pedido do produto "${productName}". Envie um feedback do que achou do produto!`,
+      data: {
+        type: "purchase_feedback",
+        productId: String(productId),
+      },
+    },
+    trigger: {
+      type: Notifications.SchedulableTriggerInputTypes.TIME_INTERVAL,
+      seconds: delayInMinutes * 60,
+    },
+  });
 }
 
 export const localNotificationsService = {
   requestPermissions,
   setupNotificationChannel,
   scheduleCartReminder,
+  scheduleFeedbackNotification,
 };
