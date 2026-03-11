@@ -5,6 +5,8 @@ import { colors } from "@/styles/colors";
 
 const DEFAULT_CHANNEL = "default";
 
+const DEEP_LINK = "marketplace://";
+
 const NOTIFICATION_IDS = {
   CART_REMINDER: "cart-reminder",
   PURCHASE_FEEDBACK: "purchase-feedback",
@@ -66,11 +68,12 @@ async function scheduleCartReminder({
   await Notifications.scheduleNotificationAsync({
     identifier: NOTIFICATION_IDS.CART_REMINDER,
     content: {
-      title: "Você esqueceu algo no carrinho!",
+      title: "🛒 Você esqueceu algo no carrinho!",
       body: `O produto ${productName} está esperando por você. Finalize sua compra agora!`,
       data: {
         type: "cart_reminder",
         productId: String(productId),
+        deepLink: `${DEEP_LINK}cart`,
       },
     },
     trigger: {
@@ -101,6 +104,7 @@ async function scheduleFeedbackNotification({
       data: {
         type: "purchase_feedback",
         productId: String(productId),
+        deepLink: `${DEEP_LINK}product/${productId}`,
       },
     },
     trigger: {
