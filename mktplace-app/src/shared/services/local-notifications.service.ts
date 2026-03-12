@@ -1,3 +1,4 @@
+import * as Linking from "expo-linking";
 import * as Notifications from "expo-notifications";
 import { Platform } from "react-native";
 
@@ -5,7 +6,7 @@ import { colors } from "@/styles/colors";
 
 const DEFAULT_CHANNEL = "default";
 
-const DEEP_LINK = "marketplace://";
+const BASE_DEEP_LINK = Linking.createURL("/");
 
 const NOTIFICATION_IDS = {
   CART_REMINDER: "cart-reminder",
@@ -73,7 +74,7 @@ async function scheduleCartReminder({
       data: {
         type: "cart_reminder",
         productId: String(productId),
-        deepLink: `${DEEP_LINK}cart`,
+        deepLink: `${BASE_DEEP_LINK}cart`,
       },
     },
     trigger: {
@@ -104,7 +105,7 @@ async function scheduleFeedbackNotification({
       data: {
         type: "purchase_feedback",
         productId: String(productId),
-        deepLink: `${DEEP_LINK}product/${productId}`,
+        deepLink: `${BASE_DEEP_LINK}product/${productId}?openFeedbackBottomSheet=true`,
       },
     },
     trigger: {
