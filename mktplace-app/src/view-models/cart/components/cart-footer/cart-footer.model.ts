@@ -39,6 +39,10 @@ export function useCartFooterViewModel() {
     }
 
     products.forEach((product, index) => {
+      localNotificationsService.cancelNotifications(
+        `${localNotificationsService.NOTIFICATION_IDS}-${product.id}`,
+      );
+
       localNotificationsService.scheduleFeedbackNotification({
         productId: product.id,
         productName: product.name,

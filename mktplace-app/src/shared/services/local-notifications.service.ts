@@ -13,6 +13,12 @@ const NOTIFICATION_IDS = {
   PURCHASE_FEEDBACK: "purchase-feedback",
 };
 
+interface ScheduleProductInterface {
+  productId: number;
+  productName: string;
+  delayInMinutes: number;
+}
+
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
     shouldPlaySound: true,
@@ -47,12 +53,6 @@ async function setupNotificationChannel() {
   }
 }
 
-interface ScheduleProductInterface {
-  productId: number;
-  productName: string;
-  delayInMinutes: number;
-}
-
 async function scheduleCartReminder({
   productId,
   productName,
@@ -67,7 +67,7 @@ async function scheduleCartReminder({
   }
 
   await Notifications.scheduleNotificationAsync({
-    identifier: NOTIFICATION_IDS.CART_REMINDER,
+    identifier: `${NOTIFICATION_IDS.CART_REMINDER}-${productId}`,
     content: {
       title: "🛒 Você esqueceu algo no carrinho!",
       body: `O produto ${productName} está esperando por você. Finalize sua compra agora!`,
@@ -115,9 +115,19 @@ async function scheduleFeedbackNotification({
   });
 }
 
+async function cancelNotifications(notificationId: string) {
+  try {
+    await Notifications.cancelScheduledNotificationAsync(notificationId);
+  } catch (error) {
+    console.error("[LocalNotifications] - Erro", JSON.stringify(error));
+  }
+}
+
 export const localNotificationsService = {
+  NOTIFICATION_IDS,
   requestPermissions,
   setupNotificationChannel,
   scheduleCartReminder,
   scheduleFeedbackNotification,
+  cancelNotifications,
 };
