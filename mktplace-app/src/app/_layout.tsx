@@ -5,6 +5,7 @@ import ToastManager from "toastify-react-native";
 
 import { AppModal } from "@/shared/components/app-modal";
 import { useNotifications } from "@/shared/hooks/useNotifications";
+import { useOneSignal } from "@/shared/hooks/useOneSignal";
 
 import "@/styles/global.css";
 
@@ -12,6 +13,7 @@ const queryClient = new QueryClient();
 
 export default function RootLayout() {
   useNotifications();
+  useOneSignal();
 
   return (
     <GestureHandlerRootView className="flex-1">
