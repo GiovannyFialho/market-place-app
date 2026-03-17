@@ -1,6 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 
+import { useOneSignal } from "@/shared/hooks/useOneSignal";
 import { useSignInMutation } from "@/shared/queries/auth/use-sign-in.mutation";
 
 import {
@@ -9,6 +10,8 @@ import {
 } from "@/view-models/sign-in/sign-in.scheme";
 
 export function useSignInSchemaViewModel() {
+  const { playerId } = useOneSignal();
+
   const {
     control,
     handleSubmit,
@@ -24,7 +27,10 @@ export function useSignInSchemaViewModel() {
   const signInMutation = useSignInMutation();
 
   const onSubmit = handleSubmit(async (userFormData) => {
-    const userData = await signInMutation.mutateAsync(userFormData);
+    await signInMutation.mutateAsync({
+      ...userFormData,
+      notificationToken: playerId,
+    });
   });
 
   return { control, onSubmit, errors };

@@ -3,12 +3,12 @@ import { CameraType } from "expo-image-picker";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 
-import { useSignUpMutation } from "@/shared/queries/auth/use-sign-up.mutation";
-import { useUserStore } from "@/shared/store/user-store";
-
 import { useImage } from "@/shared/hooks/useImage";
+import { useOneSignal } from "@/shared/hooks/useOneSignal";
 
+import { useSignUpMutation } from "@/shared/queries/auth/use-sign-up.mutation";
 import { useUploadAvatarMutation } from "@/shared/queries/auth/use-upload-avatar.mutation";
+import { useUserStore } from "@/shared/store/user-store";
 
 import {
   signUpSchema,
@@ -16,6 +16,8 @@ import {
 } from "@/view-models/sign-up/sign-up.scheme";
 
 export function useSignUpSchemaViewModel() {
+  const { playerId } = useOneSignal();
+
   const { updateUser } = useUserStore();
 
   const [avatarUri, setAvatarUri] = useState<string | null>(null);
@@ -59,7 +61,10 @@ export function useSignUpSchemaViewModel() {
   const onSubmit = handleSubmit(async (userData) => {
     const { confirmPassword, ...signUpData } = userData;
 
-    await userSignUpMutation.mutateAsync(signUpData);
+    await userSignUpMutation.mutateAsync({
+      ...signUpData,
+      notificationToken: playerId,
+    });
   });
 
   return { control, errors, onSubmit, handleSelectAvatar, avatarUri };

@@ -6,6 +6,7 @@ export interface SignUpHttpParams {
   avatarUrl?: string;
   phone: string;
   password: string;
+  notificationToken?: string;
 }
 
 export interface SignUpHttpResponse {
