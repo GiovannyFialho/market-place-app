@@ -1,6 +1,9 @@
 import { marketPlaceAPIClient } from "@/shared/api/market-place";
 
-import type { Favorite } from "@/shared/interfaces/http/favorite";
+import type {
+  AddFavoriteResponse,
+  Favorite,
+} from "@/shared/interfaces/http/favorite";
 
 export async function getFavorites() {
   const { data } = await marketPlaceAPIClient.get<Favorite[]>("/favorites");
@@ -9,7 +12,12 @@ export async function getFavorites() {
 }
 
 export async function addFavorite(productId: number) {
-  await marketPlaceAPIClient.post("/favorites", { productId });
+  const { data } = await marketPlaceAPIClient.post<AddFavoriteResponse>(
+    "/favorites",
+    { productId },
+  );
+
+  return data;
 }
 
 export async function removeFavorite(productId: number) {
