@@ -11,10 +11,10 @@ export function useRemoveFavoriteMutation() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["favorites"] });
 
-      Toast.success("Produto removido dos favoritos");
+      Toast.success("Produto removido dos favoritos", "bottom");
     },
     onError: () => {
-      Toast.error("Falha ao remover produto dos favoritos");
+      Toast.error("Falha ao remover produto dos favoritos", "bottom");
     },
   });
 

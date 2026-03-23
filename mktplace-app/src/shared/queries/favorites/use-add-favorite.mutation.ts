@@ -11,10 +11,13 @@ export function useAddFavoriteMutation() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["favorites"] });
 
-      Toast.success("Produto adicionado aos favoritos!");
+      Toast.success("Produto adicionado aos favoritos!", "bottom");
     },
     onError: (error) => {
-      Toast.error(error.message ?? "Falha ao adicionar produto nos favoritos");
+      Toast.error(
+        error.message ?? "Falha ao adicionar produto nos favoritos",
+        "bottom",
+      );
     },
   });
 
