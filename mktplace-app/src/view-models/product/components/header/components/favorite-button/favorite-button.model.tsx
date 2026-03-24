@@ -9,7 +9,7 @@ export function useFavoriteButtonViewModel(productId: number) {
     useGetFavoritesQuery();
 
   const isFavorite: boolean = useMemo(() => {
-    return favorites.some((product) => product.id === productId);
+    return favorites.some((product) => product.productId === productId);
   }, [favorites, productId]);
 
   const addFavoriteMutation = useAddFavoriteMutation();
