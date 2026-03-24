@@ -1,5 +1,5 @@
+import Constants from "expo-constants";
 import { useEffect, useState } from "react";
-import { OneSignal } from "react-native-onesignal";
 
 const ONESIGNAL_APP_ID = process.env.EXPO_PUBLIC_ONESIGNAL_APP_ID;
 
@@ -7,17 +7,33 @@ export function useOneSignal() {
   const [playerId, setPlayerId] = useState<string | undefined>();
 
   useEffect(() => {
-    if (!ONESIGNAL_APP_ID) return;
+    async function init() {
+      if (!ONESIGNAL_APP_ID) return;
 
-    OneSignal.initialize(ONESIGNAL_APP_ID);
+      const isExpoGo = Constants.executionEnvironment === "storeClient";
 
-    (async () => {
-      const playerId = await OneSignal.User.pushSubscription.getIdAsync();
+      if (isExpoGo) {
+        console.log("OneSignal não disponível no Expo Go");
 
-      if (playerId) {
-        setPlayerId(playerId);
+        return;
       }
-    })();
+
+      try {
+        const { OneSignal } = require("react-native-onesignal");
+
+        OneSignal.initialize(ONESIGNAL_APP_ID);
+
+        const id = await OneSignal.User.pushSubscription.getIdAsync();
+
+        if (id) {
+          setPlayerId(id);
+        }
+      } catch (err) {
+        console.log("Erro ao carregar OneSignal:", err);
+      }
+    }
+
+    init();
   }, []);
 
   return { playerId };

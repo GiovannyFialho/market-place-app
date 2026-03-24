@@ -33,7 +33,13 @@ async function requestPermissions(): Promise<boolean> {
   let finalStatus = existingStatus;
 
   if (existingStatus !== "granted") {
-    const { status } = await Notifications.requestPermissionsAsync();
+    const { status } = await Notifications.requestPermissionsAsync({
+      ios: {
+        allowAlert: true,
+        allowBadge: true,
+        allowSound: true,
+      },
+    });
 
     finalStatus = status;
   }
@@ -77,8 +83,9 @@ async function scheduleCartReminder({
       },
     },
     trigger: {
+      channelId: DEFAULT_CHANNEL,
       type: Notifications.SchedulableTriggerInputTypes.TIME_INTERVAL,
-      seconds: delayInMinutes * 60,
+      seconds: Math.max(60, delayInMinutes * 60),
     },
   });
 }
@@ -108,8 +115,9 @@ async function scheduleFeedbackNotification({
       },
     },
     trigger: {
+      channelId: DEFAULT_CHANNEL,
       type: Notifications.SchedulableTriggerInputTypes.TIME_INTERVAL,
-      seconds: delayInMinutes * 60,
+      seconds: Math.max(60, delayInMinutes * 60),
     },
   });
 }
