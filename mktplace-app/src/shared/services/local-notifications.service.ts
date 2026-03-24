@@ -1,4 +1,3 @@
-import * as Linking from "expo-linking";
 import * as Notifications from "expo-notifications";
 import { Platform } from "react-native";
 
@@ -6,7 +5,7 @@ import { colors } from "@/styles/colors";
 
 const DEFAULT_CHANNEL = "default";
 
-const BASE_DEEP_LINK = Linking.createURL("/");
+const BASE_DEEP_LINK = "marketplace://";
 
 const NOTIFICATION_IDS = {
   CART_REMINDER: "cart-reminder",
